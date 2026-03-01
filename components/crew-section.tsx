@@ -232,7 +232,7 @@ function YutoCard({ member }: { member: CrewMember }) {
         style={{ transformStyle: "preserve-3d" }}
       >
         <div
-          className="absolute inset-0 rounded-lg overflow-hidden"
+          className="absolute inset-0 rounded-lg overflow-hidden flex flex-col justify-end"
           style={{ backfaceVisibility: "hidden", pointerEvents: flipped ? "none" : "auto" }}
         >
           <div className="absolute inset-0 pointer-events-none">
@@ -246,7 +246,7 @@ function YutoCard({ member }: { member: CrewMember }) {
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-[#2ba61b]/[0.05] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 right-0 p-6 z-20 relative">
+          <div className="relative p-6 z-20">
             <SocialIcons links={member.social} className="mb-3" />
             <h3 className="font-[var(--font-display)] text-3xl md:text-4xl text-foreground">
               {member.name.toUpperCase().split(" ")[0]}
@@ -254,14 +254,11 @@ function YutoCard({ member }: { member: CrewMember }) {
             <p className="text-muted-foreground text-sm mt-1 tracking-wider uppercase">
               {member.role}
             </p>
-            <p className="text-primary/60 text-xs mt-2 tracking-[0.2em] uppercase">
-              Hover to reveal the other side
-            </p>
           </div>
         </div>
 
         <div
-          className="absolute inset-0 rounded-lg overflow-hidden"
+          className="absolute inset-0 rounded-lg overflow-hidden flex flex-col justify-end"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
@@ -279,7 +276,7 @@ function YutoCard({ member }: { member: CrewMember }) {
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-red-900/[0.1] mix-blend-multiply pointer-events-none" />
-          <div className="absolute bottom-0 left-0 right-0 p-6 z-20 relative">
+          <div className="relative p-6 z-20">
             <SocialIcons links={member.social} className="mb-3" />
             <h3 className="font-[var(--font-display)] text-3xl md:text-4xl text-foreground">
               {member.name.toUpperCase()}
