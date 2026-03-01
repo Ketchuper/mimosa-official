@@ -63,10 +63,10 @@ export function CustomCursor() {
         opacity: isVisible ? 1 : 0,
       }}
       transition={{
-        type: "spring",
-        stiffness: 500,
-        damping: 28,
-        mass: 0.5,
+        x: { type: "tween", duration: 0.06 },
+        y: { type: "tween", duration: 0.06 },
+        scale: { type: "spring", stiffness: 800, damping: 35, mass: 0.2 },
+        opacity: { duration: 0.15 },
       }}
     />
   )
