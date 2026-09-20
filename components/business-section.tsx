@@ -1,108 +1,161 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { getSectionTitles } from "@/lib/i18n";
 
-type BusinessItem = {
-  id: number;
-  category: string;
-  title: string;
-  description: string;
-  image: string;
-};
-
-const businessData: BusinessItem[] = [
-  {
-    id: 1,
-    category: "CREATIVE UNIT & CONTENT STUDIO",
-    title: "THE SANTAS",
-    description:
-      "「本気の悪ふざけ」を極めるクリエイティブ・ユニット。音楽と映像を掛け合わせ、規格外のイベント企画から日常のショート動画まで、あらゆる事象をエンタメコンテンツとして世界へ発信。独自プラットフォームでのプレミアム配信網の構築も見据える、MIMO$Aの中核をなすコンテンツファクトリー。",
-    image: "/images/business/THE%20SANTAS.png",
-  },
-  {
-    id: 2,
-    category: "APPAREL & CULTURE",
-    title: "MIMO$A KOZA",
-    description:
-      "沖縄市コザから発信する『古着 × 音楽』のコンセプトショップ。ストリートカルチャーを体現するアパレル展開と、コミュニティの拠点としての場作りを両立。",
-    image: "/images/business/MIMO%24A%20KOZA.png",
-  },
-  {
-    id: 3,
-    category: "GLOBAL EVENT",
-    title: "WWSA (世界スイカ割り協会)",
-    description:
-      "『スイカ割り』を戦略的スポーツへ昇華。高度な感覚遮断と身体操作を競う、言語不要のグローバル・エンターテインメント・スポーツの興行を展開。",
-    image: "/images/business/WWSA.png",
-  },
-  {
-    id: 4,
-    category: "GLOBAL EVENT",
-    title: "G.R.A.S.C. (世界ジョイントロール選手権)",
-    description:
-      "『指先のF1』。デジタル疲れの現代において、0.01gの精度を競うアナログ技術（エンジニアリング・スポーツ）の祭典を世界規模でプロデュース。",
-    image: "/images/business/G.R.A.S.C..png",
-  },
-];
+const ease = [0.16, 1, 0.3, 1] as const;
 
 export function BusinessSection() {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start end", "end start"],
+  });
+
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+
   return (
-    <section className="py-24 md:py-32 px-4 md:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-background overflow-hidden">
+      {/* ─── OUR BUSINESS 見出し ─── */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pt-24 md:pt-32 pb-10 md:pb-14">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16"
+          transition={{ duration: 0.8, ease }}
         >
           <h2 className="font-[var(--font-display)] text-5xl md:text-7xl text-foreground">
-            OUR <span className="text-primary neon-glow">BUSINESS</span>
+            {getSectionTitles().business.prefix}
+            <span className="text-primary neon-glow">
+              {getSectionTitles().business.highlight}
+            </span>
           </h2>
         </motion.div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {businessData.map((item, index) => (
-              <motion.div
-                key={item.id}
-                className="group relative overflow-hidden rounded-lg bg-card min-h-[420px] md:min-h-[480px] cursor-pointer"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.8,
-                  delay: index * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                whileHover={{ scale: 1.01 }}
-                data-hover
-              >
-                <div className="absolute inset-0">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    unoptimized
-                    className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.08] brightness-[0.5]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-[#0a0a0a]/20" />
-                </div>
+      {/* ─── MIMO$A APPAREL 紹介 ─── */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pb-10 md:pb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease }}
+        >
+          <p className="text-xs font-medium uppercase tracking-widest text-primary/90 mb-3">
+            APPAREL & CULTURE
+          </p>
+          <h3 className="font-[var(--font-display)] text-4xl md:text-5xl text-foreground mb-4 leading-tight">
+            <span className="text-primary neon-glow">MIMO$A APPAREL</span>
+          </h3>
+          <p className="text-muted-foreground max-w-lg leading-relaxed">
+            古着 × 音楽を軸に、コザの路地から発信するストリートカルチャー。厳選されたヴィンテージと独自のオリジナルピースが混在する、MIMO$Aクルーの美学そのもの。
+          </p>
+        </motion.div>
+      </div>
 
-                <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
-                  <p className="text-xs font-medium uppercase tracking-widest text-primary/90 mb-2">
-                    {item.category}
-                  </p>
-                  <h3 className="font-[var(--font-display)] text-4xl md:text-5xl text-foreground mb-3 leading-tight">
-                    <span className="text-primary neon-glow">{item.title}</span>
-                  </h3>
-                  <p className="text-muted-foreground max-w-md leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
-          ))}
+      {/* ─── ルックブック（コンテンツ幅・3:2） ─── */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
+        <div
+          ref={heroRef}
+          className="relative w-full aspect-[3/2] overflow-hidden"
+        >
+          <motion.div
+            className="absolute inset-0 will-change-transform"
+            style={{ y: heroY }}
+          >
+            <Image
+              src="/images/business/apparel-look4.jpg"
+              alt="MIMO$A APPAREL — Okinawa City night"
+              fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
+              priority
+              className="object-cover object-center"
+            />
+          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent pointer-events-none" />
         </div>
+      </div>
+
+      {/* ─── 非対称マガジングリッド ─── */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pt-3 md:pt-4 pb-12 md:pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 md:grid-rows-2 gap-2 md:gap-3 md:aspect-[16/10]">
+          {/* 左: クローズアップ — 縦長 */}
+          <motion.div
+            className="relative aspect-[2/3] md:aspect-auto md:col-span-5 md:row-span-2 overflow-hidden group"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease }}
+            whileHover={{ scale: 1.005 }}
+          >
+            <Image
+              src="/images/business/apparel-look1.jpg"
+              alt="MIMO$A APPAREL look"
+              fill
+              sizes="(max-width: 768px) 100vw, 42vw"
+              className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.04]"
+            />
+          </motion.div>
+
+          {/* 右上 */}
+          <motion.div
+            className="relative aspect-[3/2] md:aspect-auto md:col-span-7 overflow-hidden group"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.08, ease }}
+            whileHover={{ scale: 1.005 }}
+          >
+            <Image
+              src="/images/business/apparel-look2.jpg"
+              alt="MIMO$A APPAREL look"
+              fill
+              sizes="(max-width: 768px) 100vw, 58vw"
+              className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.04]"
+            />
+          </motion.div>
+
+          {/* 右下 */}
+          <motion.div
+            className="relative aspect-[3/2] md:aspect-auto md:col-span-7 overflow-hidden group"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.16, ease }}
+            whileHover={{ scale: 1.005 }}
+          >
+            <Image
+              src="/images/business/apparel-look3.jpg"
+              alt="MIMO$A APPAREL look"
+              fill
+              sizes="(max-width: 768px) 100vw, 58vw"
+              className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.04]"
+            />
+          </motion.div>
+        </div>
+
+        {/* CTA — 取扱店 */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-8 flex justify-end"
+        >
+          <Link
+            href="https://www.instagram.com/mimosa.koza/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-widest text-primary hover:text-primary/70 transition-colors"
+          >
+            取扱店 @mimosa.koza
+            <span aria-hidden="true">↗</span>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

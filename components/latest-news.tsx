@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
+import { getSectionTitles } from "@/lib/i18n"
 
 type NewsTag = "EVENT" | "RELEASE" | "VIDEO"
 
@@ -14,34 +15,27 @@ const newsData: Array<{
 }> = [
   {
     id: 1,
+    date: "2026.04.05",
+    tag: "EVENT",
+    title: "MIMO$A KOZA 「R&B NIGHT」開催",
+    url: "https://www.instagram.com/p/DWQ0I4DEqYZ/?hl=ja&img_index=1",
+  },
+  {
+    id: 3,
     date: "2026.02.06",
     tag: "EVENT",
     title: "ドキュメンタリー映画「ReSTART」コラボドリンク販売開始",
     url: "https://www.instagram.com/reel/DUabKs3E0d2/?igsh=NXhtdGx2bzEya3My",
   },
   {
-    id: 2,
+    id: 4,
     date: "2026.02.02",
     tag: "EVENT",
     title: "沖縄アリーナ「VIBE NATION 2026」出演決定",
     url: "https://www.instagram.com/reel/DUQDGuOkn7W/?igsh=MXRvMDRyMjJiaGVmdQ==",
   },
   {
-    id: 3,
-    date: "2026.01.25",
-    tag: "RELEASE",
-    title: "Yuto Ishizawa 1st Single「#ポンコツ」MV公開",
-    url: "https://youtu.be/lCy4vK0thvs?si=GVS0V8mE_vC5ebBq",
-  },
-  {
-    id: 4,
-    date: "2026.01.24",
-    tag: "RELEASE",
-    title: "Yuto Ishizawa 1st Single「#ポンコツ」サブスクリリース",
-    url: "https://linkco.re/nPB0FzEH?lang=ja",
-  },
-  {
-    id: 5,
+    id: 7,
     date: "2026.01.20",
     tag: "RELEASE",
     title: "Da-win 「Fly」サブスク配信開始",
@@ -117,17 +111,12 @@ export function LatestNews() {
             <div className="w-3 h-3 rounded-full bg-red-500/60" />
             <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
             <div className="w-3 h-3 rounded-full bg-green-500/60" />
-            <span className="ml-3 text-muted-foreground/40 text-xs font-mono tracking-wider">
-              mimosa@okinawa:~/news
-            </span>
           </div>
 
           <h2 className="font-[var(--font-display)] text-5xl md:text-7xl text-foreground">
-            LATEST <span className="text-primary neon-glow">NEWS</span>
+            {getSectionTitles().news.prefix}
+            <span className="text-primary neon-glow">{getSectionTitles().news.highlight}</span>
           </h2>
-          <p className="text-primary/40 text-xs font-mono mt-3 tracking-wider">
-            {'>'} system.broadcast --channel=all --priority=high
-          </p>
         </motion.div>
 
         {/* News entries as terminal output */}
@@ -196,16 +185,6 @@ export function LatestNews() {
           ))}
         </div>
 
-        {/* Terminal footer */}
-        <motion.div
-          className="mt-8 text-primary/20 text-xs font-mono"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 1.5 }}
-        >
-          <span className="animate-pulse">_</span> {newsData.length} entries loaded. End of broadcast.
-        </motion.div>
       </div>
     </section>
   )

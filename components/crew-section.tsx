@@ -1,8 +1,7 @@
 "use client";
 
-import type React from "react";
-import { useState, useRef, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Music2 } from "lucide-react";
 
@@ -86,19 +85,6 @@ const crewData: CrewMember[] = [
     ],
   },
   {
-    id: 2,
-    name: "Yuto Ishizawa",
-    role: "Influencer / Artist",
-    image: "/images/yuto-front.png",
-    imageBack: "/images/yuto-back.png",
-    social: [
-      { href: "https://www.tiktok.com/@yuto.utauta", label: "TikTok", icon: "tiktok" },
-      { href: "https://www.instagram.com/yuto.kamera/", label: "Instagram", icon: "instagram" },
-      { href: "https://www.youtube.com/@thesantasゆうと/shorts", label: "YouTube Shorts", icon: "youtube" },
-      { href: "https://www.tunecore.co.jp/artists/yuto.utauta?lang=ja", label: "Music (TuneCore)", icon: "music" },
-    ],
-  },
-  {
     id: 3,
     name: "Teihen Influencer",
     role: "Creator",
@@ -107,19 +93,9 @@ const crewData: CrewMember[] = [
       { href: "https://www.instagram.com/teihen.influencer/", label: "Instagram", icon: "instagram" },
     ],
   },
-  {
-    id: 4,
-    name: "Masaru",
-    role: "Creator",
-    image: "/images/masaru.png",
-    social: [
-      { href: "https://www.instagram.com/masaru.influencer/", label: "Instagram", icon: "instagram" },
-      { href: "https://www.tiktok.com/@masaru.influencer", label: "TikTok", icon: "tiktok" },
-    ],
-  },
 ];
 
-function DaWinCard({ member }: { member: CrewMember }) {
+function DaWinCard({ member, priority }: { member: CrewMember; priority?: boolean }) {
   const [hovered, setHovered] = useState(false);
   const [bars] = useState(() => Array.from({ length: 24 }, () => Math.random()));
 
@@ -137,7 +113,8 @@ function DaWinCard({ member }: { member: CrewMember }) {
           src={member.image}
           alt={`${member.name}`}
           fill
-          unoptimized
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority={priority}
           className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]"
         />
       </div>
@@ -190,7 +167,7 @@ function DaWinCard({ member }: { member: CrewMember }) {
           }}
           transition={{ duration: 0.6 }}
         >
-          {member.name.toUpperCase()}
+          {member.name}
         </motion.h3>
         <p className="text-muted-foreground text-sm mt-1 tracking-wider uppercase">
           {member.role}
@@ -213,92 +190,7 @@ function DaWinCard({ member }: { member: CrewMember }) {
   );
 }
 
-function YutoCard({ member }: { member: CrewMember }) {
-  const [flipped, setFlipped] = useState(false);
-  const backImage = member.imageBack ?? member.image;
-
-  return (
-    <div
-      className="relative aspect-square cursor-none"
-      style={{ perspective: "1200px" }}
-      onMouseEnter={() => setFlipped(true)}
-      onMouseLeave={() => setFlipped(false)}
-      data-hover
-    >
-      <motion.div
-        className="relative w-full h-full"
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        style={{ transformStyle: "preserve-3d" }}
-      >
-        <div
-          className="absolute inset-0 rounded-lg overflow-hidden flex flex-col justify-end"
-          style={{ backfaceVisibility: "hidden", pointerEvents: flipped ? "none" : "auto" }}
-        >
-          <div className="absolute inset-0 pointer-events-none">
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              unoptimized
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-[#2ba61b]/[0.05] pointer-events-none" />
-          <div className="relative p-6 z-20">
-            <SocialIcons links={member.social} className="mb-3" />
-            <h3 className="font-[var(--font-display)] text-3xl md:text-4xl text-foreground">
-              {member.name.toUpperCase().split(" ")[0]}
-            </h3>
-            <p className="text-muted-foreground text-sm mt-1 tracking-wider uppercase">
-              {member.role}
-            </p>
-          </div>
-        </div>
-
-        <div
-          className="absolute inset-0 rounded-lg overflow-hidden flex flex-col justify-end"
-          style={{
-            backfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-            pointerEvents: flipped ? "auto" : "none",
-          }}
-        >
-          <div className="absolute inset-0 pointer-events-none">
-            <Image
-              src={backImage}
-              alt={`${member.name} - back`}
-              fill
-              unoptimized
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-red-900/[0.1] mix-blend-multiply pointer-events-none" />
-          <div className="relative p-6 z-20">
-            <SocialIcons links={member.social} className="mb-3" />
-            <h3 className="font-[var(--font-display)] text-3xl md:text-4xl text-foreground">
-              {member.name.toUpperCase()}
-            </h3>
-            <p className="text-red-400/80 text-sm mt-1 tracking-wider uppercase">
-              The Raw Artist
-            </p>
-          </div>
-          <div
-            className="absolute inset-0 rounded-lg pointer-events-none"
-            style={{
-              border: "1px solid rgba(220,38,38,0.3)",
-              boxShadow: "inset 0 0 40px rgba(220,38,38,0.08)",
-            }}
-          />
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
-function TeihenCard({ member }: { member: CrewMember }) {
+function TeihenCard({ member, priority }: { member: CrewMember; priority?: boolean }) {
   const [hovered, setHovered] = useState(false);
   const [glitch, setGlitch] = useState({
     x: 0,
@@ -337,7 +229,8 @@ function TeihenCard({ member }: { member: CrewMember }) {
           src={member.image}
           alt={member.name}
           fill
-          unoptimized
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority={priority}
           className="object-cover"
         />
       </div>
@@ -352,7 +245,7 @@ function TeihenCard({ member }: { member: CrewMember }) {
             src={member.image}
             alt=""
             fill
-            unoptimized
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
             style={{ filter: "saturate(0) brightness(0.5)", opacity: 0.4 }}
           />
@@ -368,7 +261,7 @@ function TeihenCard({ member }: { member: CrewMember }) {
             src={member.image}
             alt=""
             fill
-            unoptimized
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
             style={{ filter: "saturate(0) brightness(0.5)", opacity: 0.4 }}
           />
@@ -419,7 +312,7 @@ function TeihenCard({ member }: { member: CrewMember }) {
             textShadow: "2px 0 #ff0000, -2px 0 #00ffff",
           }}
         >
-          {member.name.toUpperCase()}
+          {member.name}
         </motion.h3>
         <p className="text-muted-foreground text-sm mt-1 tracking-wider uppercase">
           {member.role}
@@ -439,111 +332,10 @@ function TeihenCard({ member }: { member: CrewMember }) {
   );
 }
 
-function MasaruCard({ member }: { member: CrewMember }) {
-  const [hovered, setHovered] = useState(false);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [imageError, setImageError] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMouse({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  }, []);
-
-  return (
-    <motion.div
-      ref={cardRef}
-      className="relative overflow-hidden rounded-lg bg-[#050505] aspect-square cursor-none"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onMouseMove={handleMouseMove}
-      data-hover
-    >
-      <div className="absolute inset-0 bg-[#050505]" />
-      {!imageError && (
-        <div
-          className="absolute inset-0 transition-opacity duration-500"
-          style={{
-            backgroundImage: `url(${member.image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: hovered ? 1 : 0,
-            maskImage: hovered
-              ? `radial-gradient(circle 100px at ${mouse.x}px ${mouse.y}px, black 0%, rgba(0,0,0,0.6) 40%, transparent 100%)`
-              : "none",
-            WebkitMaskImage: hovered
-              ? `radial-gradient(circle 100px at ${mouse.x}px ${mouse.y}px, black 0%, rgba(0,0,0,0.6) 40%, transparent 100%)`
-              : "none",
-          }}
-        />
-      )}
-      {/* Hidden img to detect load error and trigger fallback */}
-      <img
-        src={member.image}
-        alt=""
-        className="absolute w-0 h-0 opacity-0 pointer-events-none"
-        onError={() => setImageError(true)}
-      />
-      {imageError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted/20">
-          <div className="w-24 h-24 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
-            <Music2 className="w-12 h-12 text-primary/50" />
-          </div>
-        </div>
-      )}
-      {hovered && (
-        <div
-          className="absolute w-[250px] h-[250px] rounded-full pointer-events-none mix-blend-soft-light"
-          style={{
-            left: mouse.x - 125,
-            top: mouse.y - 125,
-            background:
-              "radial-gradient(circle, rgba(43,166,27,0.08) 0%, transparent 70%)",
-          }}
-        />
-      )}
-      <AnimatePresence>
-        {!hovered && (
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <span className="text-foreground/[0.06] text-6xl font-[var(--font-display)] tracking-[0.3em] uppercase">
-              ???
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {/* MASARU: 名前・SNS・役職は常に表示 */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-        <SocialIcons links={member.social} className="mb-3" />
-        <h3 className="font-[var(--font-display)] text-3xl md:text-4xl text-foreground">
-          {member.name.toUpperCase()}
-        </h3>
-        <p className="text-red-400/60 text-sm mt-1 tracking-wider uppercase">
-          {member.role}
-        </p>
-      </div>
-      <div
-        className="absolute inset-0 rounded-lg pointer-events-none transition-all duration-500"
-        style={{
-          border: hovered
-            ? "1px solid rgba(220,38,38,0.2)"
-            : "1px solid rgba(255,255,255,0.03)",
-        }}
-      />
-    </motion.div>
-  );
-}
-
-const CARD_COMPONENTS = [DaWinCard, YutoCard, TeihenCard, MasaruCard] as const;
+const CARD_BY_ID: Record<number, typeof DaWinCard> = {
+  1: DaWinCard,
+  3: TeihenCard,
+};
 
 export function CrewSection() {
   return (
@@ -566,7 +358,7 @@ export function CrewSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {crewData.map((member, index) => {
-            const CardComponent = CARD_COMPONENTS[index] ?? DaWinCard;
+            const CardComponent = CARD_BY_ID[member.id] ?? DaWinCard;
             return (
               <motion.div
                 key={member.id}
@@ -579,7 +371,7 @@ export function CrewSection() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
-                <CardComponent member={member} />
+                <CardComponent member={member} priority={index < 2} />
               </motion.div>
             );
           })}

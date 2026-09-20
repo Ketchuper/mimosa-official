@@ -16,13 +16,14 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'MIMO$A | Creative Crew from Okinawa',
+  title: 'MIMO$A | Creative crew BASED IN OKINAWA',
   description: 'MIMO$A - A creative crew from Okinawa pushing boundaries in entertainment and fashion.',
   generator: 'v0.app',
 }
 
 export const viewport: Viewport = {
   themeColor: '#0a0a0a',
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({

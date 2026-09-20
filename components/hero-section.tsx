@@ -104,18 +104,17 @@ export function HeroSection() {
             height={500}
             className="w-[60vw] md:w-[40vw] lg:w-[30vw] max-w-[500px] h-auto relative z-10 drop-shadow-[0_0_30px_rgba(43,166,27,0.15)]"
             priority
-            unoptimized // 👈 これを追記するだけ！
           />
         </motion.div>
 
         {/* Tagline with staggered entrance */}
         <motion.p
-          className="mt-8 text-muted-foreground text-xs md:text-sm uppercase tracking-[0.4em] font-sans"
+          className="mt-8 text-muted-foreground text-xs md:text-sm tracking-[0.4em] font-sans"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 1, ease: "easeOut" }}
         >
-          Creative Crew from Okinawa
+          Creative crew <span className="uppercase">BASED IN OKINAWA</span>
         </motion.p>
 
         {/* Animated line */}

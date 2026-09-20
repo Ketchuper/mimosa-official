@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { useState } from "react";
+import { getSectionTitles } from "@/lib/i18n";
 
 const INQUIRY_OPTIONS = [
   { value: "", label: "お問い合わせ種別を選択" },
@@ -13,7 +14,7 @@ const INQUIRY_OPTIONS = [
   { value: "other", label: "その他" },
 ] as const;
 
-const OFFICIAL_EMAIL = "sns@m-i-m-o-s-a.com";
+const OFFICIAL_EMAIL = "contact@m-i-m-o-s-a.com";
 const OFFICIAL_INSTAGRAM_URL = "https://www.instagram.com/mimosa.mybrain/";
 
 function InstagramIcon({ className }: { className?: string }) {
@@ -59,7 +60,7 @@ export function ContactSection() {
           className="mb-16"
         >
           <h2 className="font-[var(--font-display)] text-5xl md:text-7xl text-foreground">
-            CONTACT
+            {getSectionTitles().contact}
           </h2>
         </motion.div>
 
