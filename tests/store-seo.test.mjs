@@ -21,11 +21,11 @@ test('localized pages identify the same business and only link matching profiles
   assert.deepEqual(ja.sameAs, [store.contactUrl])
 })
 
-test('preopening and address-incomplete stores do not claim an open street business', () => {
+test('preopening stores do not claim an open street business', () => {
   const gate2 = stores.find((store) => store.slug === 'mimosa-gate2')
   const koza = stores.find((store) => store.slug === 'mimosa-koza')
   assert.equal(localBusinessJsonLd(gate2, 'ja'), undefined)
-  assert.equal(localBusinessJsonLd(koza, 'ja'), undefined)
+  assert.equal(localBusinessJsonLd(koza, 'ja').address.postalCode, '904-0032')
 })
 
 test('metadata identifies each language and gives unopened stores truthful titles', () => {

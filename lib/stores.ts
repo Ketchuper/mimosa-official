@@ -75,6 +75,8 @@ export const stores: Store[] = [
       en: { category: 'Vintage clothing and culture', description: 'A vintage clothing and music shop in Koza, Okinawa City, sharing selected pieces and events.', highlights: ['Vintage clothing', 'Selected pieces', 'Music events'] },
     },
     image: '/images/spots/mimosa.png',
+    address: { ja: '〒904-0032 沖縄県沖縄市諸見里1丁目25-8 ハピネスプラザビル702', en: 'Happiness Plaza Building 702, 1-25-8 Moromizato, Okinawa, Okinawa 904-0032, Japan', streetAddress: 'Happiness Plaza Building 702, 1-25-8 Moromizato', locality: 'Okinawa', postalCode: '904-0032' },
+    mapUrl: 'https://maps.app.goo.gl/797o4TCYbXZWMYn26',
     contactUrl: 'https://www.instagram.com/mimosa.koza/',
   },
   {
