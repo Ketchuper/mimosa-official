@@ -7,7 +7,7 @@ test('open stores with a verified street address receive localized LocalBusiness
   const replica = stores.find((store) => store.slug === 'bar-replica')
   const data = localBusinessJsonLd(replica, 'en')
   assert.equal(data['@type'], 'BarOrPub')
-  assert.equal(data.name, 'BAR REPLICA')
+  assert.equal(data.name, 'Bar REPLICA')
   assert.equal(data.address['@type'], 'PostalAddress')
   assert.equal(data.address.postalCode, '905-0013')
   assert.equal(data.openingHoursSpecification, undefined)

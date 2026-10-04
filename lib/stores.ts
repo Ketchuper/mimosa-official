@@ -20,7 +20,7 @@ export type Store = {
 export const stores: Store[] = [
   {
     slug: 'bar-chura-kin',
-    name: 'Bar CHURA kin',
+    name: 'Bar CHURA Kin',
     status: 'open',
     category: 'BarOrPub',
     area: { ja: '沖縄県金武町', en: 'Kin, Okinawa' },
@@ -35,7 +35,7 @@ export const stores: Store[] = [
   },
   {
     slug: 'bar-replica',
-    name: 'BAR REPLICA',
+    name: 'Bar REPLICA',
     status: 'open',
     category: 'BarOrPub',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },

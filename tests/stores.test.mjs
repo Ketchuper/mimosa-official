@@ -14,6 +14,8 @@ test('the public inventory contains exactly the six confirmed stores', () => {
   assert.deepEqual(stores.map((store) => store.status), [
     'open', 'open', 'open', 'open', 'preopening', 'preopening',
   ])
+  assert.equal(getStore('bar-chura-kin')?.name, 'Bar CHURA Kin')
+  assert.equal(getStore('bar-replica')?.name, 'Bar REPLICA')
   assert.ok(stores.every((store) => store.name !== 'El, france'))
 })
 
