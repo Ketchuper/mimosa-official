@@ -1,0 +1,110 @@
+export type Locale = 'ja' | 'en'
+export type StoreStatus = 'open' | 'preopening'
+
+export type Store = {
+  slug: string
+  name: string
+  status: StoreStatus
+  category: 'BarOrPub' | 'Restaurant' | 'ClothingStore'
+  area: { ja: string; en: string }
+  copy: Record<Locale, { category: string; description: string; highlights: string[] }>
+  image?: string
+  address?: { ja: string; en: string; streetAddress: string; locality: string; postalCode: string }
+  hours?: { ja: string; en: string }
+  phone?: string
+  mapUrl?: string
+  contactUrl?: string
+  externalSiteUrl?: string
+}
+
+export const stores: Store[] = [
+  {
+    slug: 'bar-chura-kin',
+    name: 'Bar CHURA kin',
+    status: 'open',
+    category: 'BarOrPub',
+    area: { ja: '沖縄県金武町', en: 'Kin, Okinawa' },
+    copy: {
+      ja: { category: 'バー', description: '金武町、キャンプ・ハンセン近くのバー。カラオケ、オリジナルカクテル、ボードゲームを楽しめます。', highlights: ['カラオケ', 'オリジナルカクテル', 'ボードゲーム'] },
+      en: { category: 'Bar', description: 'A bar near Camp Hansen in Kin, Okinawa, with karaoke, original cocktails and board games.', highlights: ['Karaoke', 'Original cocktails', 'Board games'] },
+    },
+    address: { ja: '〒904-1201 沖縄県国頭郡金武町金武4323-1', en: '4323-1 Kin, Kin Town, Okinawa 904-1201, Japan', streetAddress: '4323-1 Kin', locality: 'Kin Town', postalCode: '904-1201' },
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Bar%20CHURA%20kin%20Kin%204323-1',
+    contactUrl: 'https://www.instagram.com/barchura.kin/',
+    externalSiteUrl: 'https://churagroupjapan.com/',
+  },
+  {
+    slug: 'bar-replica',
+    name: 'BAR REPLICA',
+    status: 'open',
+    category: 'BarOrPub',
+    area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
+    copy: {
+      ja: { category: 'ミュージックバー', description: '名護市城のバー。ダーツとカラオケを楽しめる夜のスポットです。', highlights: ['ダーツ', 'カラオケ', '名護市城'] },
+      en: { category: 'Music bar', description: 'A bar in Nago, Okinawa, where guests can enjoy darts and karaoke.', highlights: ['Darts', 'Karaoke', 'Central Nago'] },
+    },
+    image: '/images/spots/replica.png',
+    address: { ja: '〒905-0013 沖縄県名護市城1-1-17', en: '1-1-17 Gusuku, Nago, Okinawa 905-0013, Japan', streetAddress: '1-1-17 Gusuku', locality: 'Nago', postalCode: '905-0013' },
+    mapUrl: 'https://maps.app.goo.gl/AGW5uiUUDS81NQBi9',
+    contactUrl: 'https://www.instagram.com/replica.nago/',
+  },
+  {
+    slug: 'tontonton',
+    name: '豚豚豚 金武本店',
+    status: 'open',
+    category: 'Restaurant',
+    area: { ja: '沖縄県金武町', en: 'Kin, Okinawa' },
+    copy: {
+      ja: { category: 'ラーメン', description: '金武町のラーメン店。豚骨チャーシュー麺、豚豚豚麺、冷製麺「ヤー麺」などを提供しています。', highlights: ['豚骨チャーシュー麺', '豚豚豚麺', 'ヤー麺'] },
+      en: { category: 'Ramen', description: 'A ramen restaurant in Kin, Okinawa. Its menu includes tonkotsu chashu ramen, Tontonton ramen and the chilled Yaamen.', highlights: ['Tonkotsu chashu ramen', 'Tontonton ramen', 'Yaamen'] },
+    },
+    image: '/images/spots/tontonton.png',
+    address: { ja: '〒904-1201 沖縄県国頭郡金武町金武4248-3', en: '4248-3 Kin, Kin Town, Okinawa 904-1201, Japan', streetAddress: '4248-3 Kin', locality: 'Kin Town', postalCode: '904-1201' },
+    mapUrl: 'https://maps.app.goo.gl/Z81XyhimC7eao5wF9',
+    contactUrl: 'https://www.instagram.com/tontonton.okinawa/',
+    externalSiteUrl: 'https://greenparkjapan.com/',
+  },
+  {
+    slug: 'mimosa-koza',
+    name: 'MIMO$A KOZA',
+    status: 'open',
+    category: 'ClothingStore',
+    area: { ja: '沖縄県沖縄市・コザ', en: 'Koza, Okinawa City' },
+    copy: {
+      ja: { category: '古着・カルチャー', description: '沖縄市コザの古着と音楽のショップ。ヴィンテージを中心にしたセレクトとイベントを発信しています。', highlights: ['ヴィンテージ', 'セレクト古着', '音楽イベント'] },
+      en: { category: 'Vintage clothing and culture', description: 'A vintage clothing and music shop in Koza, Okinawa City, sharing selected pieces and events.', highlights: ['Vintage clothing', 'Selected pieces', 'Music events'] },
+    },
+    image: '/images/spots/mimosa.png',
+    contactUrl: 'https://www.instagram.com/mimosa.koza/',
+  },
+  {
+    slug: 'mimosa-gate2',
+    name: 'MIMO$A GATE2',
+    status: 'preopening',
+    category: 'BarOrPub',
+    area: { ja: '沖縄県沖縄市・ゲート通り周辺', en: 'Gate 2 Street area, Okinawa City' },
+    copy: {
+      ja: { category: 'バー・開業準備中', description: '沖縄市ゲート通り周辺で開業準備中のバー。開業日、住所、営業時間は確定後にお知らせします。', highlights: [] },
+      en: { category: 'Bar · Preparing to open', description: 'A bar preparing to open near Gate 2 Street in Okinawa City. The opening date, address and hours will be announced when confirmed.', highlights: [] },
+    },
+  },
+  {
+    slug: 'heavens-wagyu-sandwich-gate2',
+    name: "Heaven's Wagyu Sandwich GATE2",
+    status: 'preopening',
+    category: 'Restaurant',
+    area: { ja: '沖縄県沖縄市・ゲート通り周辺', en: 'Gate 2 Street area, Okinawa City' },
+    copy: {
+      ja: { category: '和牛サンドイッチ・開業準備中', description: '沖縄市ゲート通り周辺で和牛サンドイッチ店を準備中です。商品、開業日、住所、営業時間は確定後にお知らせします。', highlights: [] },
+      en: { category: 'Wagyu sandwiches · Preparing to open', description: 'A wagyu sandwich shop is preparing to open near Gate 2 Street in Okinawa City. Products, opening date, address and hours will be announced when confirmed.', highlights: [] },
+    },
+  },
+]
+
+export function getStore(slug: string) {
+  return stores.find((store) => store.slug === slug)
+}
+
+export function storePath(slug: string, locale: Locale) {
+  return `${locale === 'en' ? '/en' : ''}/shops/${slug}`
+}
