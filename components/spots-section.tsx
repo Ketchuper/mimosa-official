@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { stores, storePath } from '@/lib/stores'
+import { stores, storeCardAddress, storePath } from '@/lib/stores'
 import { getSectionTitles } from '@/lib/i18n'
 
 export function SpotsSection() {
@@ -24,7 +24,10 @@ export function SpotsSection() {
                 <div className="relative aspect-square overflow-hidden rounded-t-lg bg-gradient-to-br from-[#153811] via-[#111] to-black">
                   {store.image ? <Image src={store.image} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" /> : <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center font-[var(--font-display)] text-4xl tracking-widest text-white/60">MIMO$A</span>}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  <span className="absolute bottom-4 left-4 rounded bg-primary px-2 py-1 text-xs font-bold text-black">{store.area.ja}</span>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <span className="inline-block rounded bg-primary px-2 py-1 text-xs font-bold text-black">{store.area.ja}</span>
+                    <p className="mt-2 text-xs font-medium leading-5 text-white drop-shadow-md">{storeCardAddress(store)}</p>
+                  </div>
                 </div>
                 <div className="p-5">
                   <h3 className="font-[var(--font-display)] text-xl transition-colors group-hover:text-primary md:text-2xl">{store.name}</h3>
