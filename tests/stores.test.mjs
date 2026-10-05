@@ -27,7 +27,6 @@ test('every live store has a useful action without inventing facts for unopened 
     if (store.status === 'preopening') {
       assert.equal(store.hours, undefined)
       assert.equal(store.phone, undefined)
-      assert.equal(store.mapUrl, undefined)
     }
   }
   assert.equal(getStore('tontonton')?.hours, undefined)
@@ -39,10 +38,17 @@ test('store paths are stable and locale-specific', () => {
   assert.equal(getStore('not-a-store'), undefined)
 })
 
-test('shop cards show a verified address or a truthful pre-opening notice', () => {
+test('shop cards show verified addresses for every confirmed location', () => {
   assert.equal(
     storeCardAddress(getStore('mimosa-koza')),
     '〒904-0032 沖縄県沖縄市諸見里1丁目25-8 ハピネスプラザビル702',
   )
-  assert.equal(storeCardAddress(getStore('mimosa-gate2')), '住所は開業時にご案内')
+  const gate2Address = '〒904-0004 沖縄県沖縄市中央1丁目27-11-3F'
+  assert.equal(storeCardAddress(getStore('mimosa-gate2')), gate2Address)
+  assert.equal(storeCardAddress(getStore('heavens-wagyu-sandwich-gate2')), gate2Address)
+})
+
+test('requested CHURA and wagyu sandwich photos are assigned to their shops', () => {
+  assert.equal(getStore('bar-chura-kin')?.image, '/images/spots/churakin.png')
+  assert.equal(getStore('heavens-wagyu-sandwich-gate2')?.image, '/images/spots/gate2.jpg')
 })

@@ -74,7 +74,11 @@ export function StoreDetail({ store, locale }: { store: Store; locale: Locale })
               </div>
             </>
           ) : (
-            <p className="mt-5 max-w-2xl leading-8 text-white/75">{en ? 'This location is preparing to open. We will share its address, opening date and contact details after they are confirmed.' : '現在、開業準備中です。住所・開業日・連絡先は確定後にご案内します。'}</p>
+            <>
+              {store.address && <p className="mt-5 text-white/80">{store.address[locale]}</p>}
+              <p className="mt-2 max-w-2xl leading-8 text-white/75">{en ? 'This location is preparing to open. We will share its opening date and contact details after they are confirmed.' : '現在、開業準備中です。開業日・連絡先は確定後にご案内します。'}</p>
+              {store.mapUrl && <div className="mt-7"><a className="rounded bg-primary px-5 py-3 font-bold text-black hover:opacity-85" href={store.mapUrl} target="_blank" rel="noopener noreferrer">{en ? 'Open map' : '地図を見る'}</a></div>}
+            </>
           )}
         </section>
       </article>

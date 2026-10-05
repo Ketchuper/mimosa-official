@@ -28,6 +28,7 @@ export const stores: Store[] = [
       ja: { category: 'バー', description: '金武町、キャンプ・ハンセン近くのバー。カラオケ、オリジナルカクテル、ボードゲームを楽しめます。', highlights: ['カラオケ', 'オリジナルカクテル', 'ボードゲーム'] },
       en: { category: 'Bar', description: 'A bar near Camp Hansen in Kin, Okinawa, with karaoke, original cocktails and board games.', highlights: ['Karaoke', 'Original cocktails', 'Board games'] },
     },
+    image: '/images/spots/churakin.png',
     address: { ja: '〒904-1201 沖縄県国頭郡金武町金武4323-1', en: '4323-1 Kin, Kin Town, Okinawa 904-1201, Japan', streetAddress: '4323-1 Kin', locality: 'Kin Town', postalCode: '904-1201' },
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Bar%20CHURA%20kin%20Kin%204323-1',
     contactUrl: 'https://www.instagram.com/barchura.kin/',
@@ -86,9 +87,11 @@ export const stores: Store[] = [
     category: 'BarOrPub',
     area: { ja: '沖縄県沖縄市・ゲート通り周辺', en: 'Gate 2 Street area, Okinawa City' },
     copy: {
-      ja: { category: 'バー・開業準備中', description: '沖縄市ゲート通り周辺で開業準備中のバー。開業日、住所、営業時間は確定後にお知らせします。', highlights: [] },
-      en: { category: 'Bar · Preparing to open', description: 'A bar preparing to open near Gate 2 Street in Okinawa City. The opening date, address and hours will be announced when confirmed.', highlights: [] },
+      ja: { category: 'バー・開業準備中', description: '沖縄市中央で開業準備中のバー。開業日と営業時間は確定後にお知らせします。', highlights: [] },
+      en: { category: 'Bar · Preparing to open', description: 'A bar preparing to open in Chuo, Okinawa City. The opening date and hours will be announced when confirmed.', highlights: [] },
     },
+    address: { ja: '〒904-0004 沖縄県沖縄市中央1丁目27-11-3F', en: '3F, 1-27-11 Chuo, Okinawa, Okinawa 904-0004, Japan', streetAddress: '3F, 1-27-11 Chuo', locality: 'Okinawa', postalCode: '904-0004' },
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E3%80%92904-0004%20%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E4%B8%AD%E5%A4%AE1%E4%B8%81%E7%9B%AE27-11-3F',
   },
   {
     slug: 'heavens-wagyu-sandwich-gate2',
@@ -97,9 +100,12 @@ export const stores: Store[] = [
     category: 'Restaurant',
     area: { ja: '沖縄県沖縄市・ゲート通り周辺', en: 'Gate 2 Street area, Okinawa City' },
     copy: {
-      ja: { category: '和牛サンドイッチ・開業準備中', description: '沖縄市ゲート通り周辺で和牛サンドイッチ店を準備中です。商品、開業日、住所、営業時間は確定後にお知らせします。', highlights: [] },
-      en: { category: 'Wagyu sandwiches · Preparing to open', description: 'A wagyu sandwich shop is preparing to open near Gate 2 Street in Okinawa City. Products, opening date, address and hours will be announced when confirmed.', highlights: [] },
+      ja: { category: '和牛サンドイッチ・開業準備中', description: '沖縄市中央で和牛サンドイッチ店を準備中です。商品、開業日、営業時間は確定後にお知らせします。', highlights: [] },
+      en: { category: 'Wagyu sandwiches · Preparing to open', description: 'A wagyu sandwich shop is preparing to open in Chuo, Okinawa City. Products, opening date and hours will be announced when confirmed.', highlights: [] },
     },
+    image: '/images/spots/gate2.jpg',
+    address: { ja: '〒904-0004 沖縄県沖縄市中央1丁目27-11-3F', en: '3F, 1-27-11 Chuo, Okinawa, Okinawa 904-0004, Japan', streetAddress: '3F, 1-27-11 Chuo', locality: 'Okinawa', postalCode: '904-0004' },
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E3%80%92904-0004%20%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E4%B8%AD%E5%A4%AE1%E4%B8%81%E7%9B%AE27-11-3F',
   },
 ]
 
