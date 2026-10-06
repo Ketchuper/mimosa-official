@@ -28,10 +28,11 @@ test('preopening stores do not claim an open street business', () => {
   assert.equal(localBusinessJsonLd(koza, 'ja').address.postalCode, '904-0032')
 })
 
-test('closed stores are clearly labeled and excluded from LocalBusiness structured data', () => {
+test('El, france has no closure claim in its public copy or SEO metadata', () => {
   const elFrance = stores.find((store) => store.slug === 'el-france')
   assert.equal(localBusinessJsonLd(elFrance, 'ja'), undefined)
-  assert.match(storeMetadata(elFrance, 'ja').title, /閉店/)
+  const metadata = storeMetadata(elFrance, 'ja')
+  assert.doesNotMatch(`${metadata.title} ${metadata.description} ${elFrance.copy.en.description} ${elFrance.copy.ja.category} ${elFrance.copy.ja.description}`, /閉店|閉業|Closed|formerly|no longer open|過去に運営/i)
 })
 
 test('metadata identifies each language and gives unopened stores truthful titles', () => {

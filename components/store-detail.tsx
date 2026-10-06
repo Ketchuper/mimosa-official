@@ -40,11 +40,6 @@ export function StoreDetail({ store, locale }: { store: Store; locale: Locale })
                 {en ? 'Preparing to open' : '開業準備中'}
               </p>
             )}
-            {store.status === 'closed' && (
-              <p className="mt-8 inline-block rounded-full border border-white/50 px-4 py-2 text-sm font-bold text-white/80">
-                {en ? 'Closed' : '閉店しました'}
-              </p>
-            )}
             {copy.highlights.length > 0 && (
               <section className="mt-12" aria-label={en ? 'Highlights' : '特徴'}>
                 <h2 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-primary">{en ? 'Highlights' : 'この店について'}</h2>
@@ -65,7 +60,7 @@ export function StoreDetail({ store, locale }: { store: Store; locale: Locale })
           )}
         </div>
 
-        <section className="mt-16 border-t border-white/15 pt-10" aria-labelledby="store-access">
+        {store.status && <section className="mt-16 border-t border-white/15 pt-10" aria-labelledby="store-access">
           <h2 id="store-access" className="font-[var(--font-display)] text-3xl">{en ? 'VISIT & CONTACT' : 'アクセス・連絡先'}</h2>
           {store.status === 'open' ? (
             <>
@@ -78,16 +73,14 @@ export function StoreDetail({ store, locale }: { store: Store; locale: Locale })
                 {store.contactUrl && <a className="rounded border border-white/30 px-5 py-3 font-bold hover:border-primary" href={store.contactUrl} target="_blank" rel="noopener noreferrer">{en ? 'Instagram' : 'インスタグラム'}</a>}
               </div>
             </>
-          ) : store.status === 'preopening' ? (
+          ) : (
             <>
               {store.address && <p className="mt-5 text-white/80">{store.address[locale]}</p>}
               <p className="mt-2 max-w-2xl leading-8 text-white/75">{en ? 'This location is preparing to open. We will share its opening date and contact details after they are confirmed.' : '現在、開業準備中です。開業日・連絡先は確定後にご案内します。'}</p>
               {store.mapUrl && <div className="mt-7"><a className="rounded bg-primary px-5 py-3 font-bold text-black hover:opacity-85" href={store.mapUrl} target="_blank" rel="noopener noreferrer">{en ? 'Google Maps' : 'Googleマップ'}</a></div>}
             </>
-          ) : (
-            <p className="mt-5 max-w-2xl leading-8 text-white/75">{en ? 'This restaurant is closed and is no longer open to visitors.' : 'こちらの店舗は閉店しており、現在営業していません。'}</p>
           )}
-        </section>
+        </section>}
       </article>
     </main>
   )

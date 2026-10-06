@@ -1,10 +1,10 @@
 export type Locale = 'ja' | 'en'
-export type StoreStatus = 'open' | 'preopening' | 'closed'
+export type StoreStatus = 'open' | 'preopening'
 
 export type Store = {
   slug: string
   name: string
-  status: StoreStatus
+  status?: StoreStatus
   isPublic?: boolean
   category: 'BarOrPub' | 'Restaurant' | 'ClothingStore'
   area: { ja: string; en: string }
@@ -118,13 +118,12 @@ export const stores: Store[] = [
   {
     slug: 'el-france',
     name: 'El, france',
-    status: 'closed',
     isPublic: true,
     category: 'Restaurant',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
     copy: {
-      ja: { category: '鉄板焼きステーキ・閉店済み', description: '名護市で営業していた鉄板焼きステーキ店です。現在は閉店しています。', highlights: [] },
-      en: { category: 'Teppanyaki steak · Closed', description: 'A teppanyaki steak restaurant formerly operated in Nago, Okinawa. It is now closed.', highlights: [] },
+      ja: { category: '鉄板焼きステーキ', description: '名護市の鉄板焼きステーキ店です。', highlights: [] },
+      en: { category: 'Teppanyaki steak', description: 'A teppanyaki steak restaurant in Nago, Okinawa.', highlights: [] },
     },
     image: '/images/spots/elfrance.png',
   },
@@ -142,6 +141,5 @@ export function storePath(slug: string, locale: Locale) {
 
 export function storeCardAddress(store: Store | undefined) {
   if (!store) return ''
-  if (store.status === 'closed') return ''
   return store.address?.ja ?? '住所は開業時にご案内'
 }
