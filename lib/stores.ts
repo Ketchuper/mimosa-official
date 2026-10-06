@@ -39,6 +39,7 @@ export const stores: Store[] = [
     slug: 'bar-replica',
     name: 'Bar REPLICA',
     status: 'open',
+    isPublic: false,
     category: 'BarOrPub',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
     copy: {
@@ -114,6 +115,7 @@ export const stores: Store[] = [
     slug: 'el-france',
     name: 'El, france',
     status: 'closed',
+    isPublic: false,
     category: 'Restaurant',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
     copy: {
