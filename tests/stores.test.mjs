@@ -20,9 +20,9 @@ test('the public inventory shows only Bar REPLICA and El, france', () => {
   assert.equal(elFrance?.name, 'El, france')
   assert.equal(elFrance?.status, undefined)
   assert.doesNotMatch(`${elFrance?.copy.ja.category} ${elFrance?.copy.ja.description} ${elFrance?.copy.en.category} ${elFrance?.copy.en.description}`, /閉店|閉業|Closed|formerly|no longer open/i)
-  assert.equal(elFrance?.address, undefined)
+  assert.ok(elFrance?.address)
   assert.equal(elFrance?.hours, undefined)
-  assert.equal(elFrance?.mapUrl, undefined)
+  assert.ok(elFrance?.mapUrl)
 })
 
 test('public store area labels use only formal prefecture and city names', () => {
@@ -58,6 +58,19 @@ test('shop cards show verified addresses for every confirmed location', () => {
   const gate2Address = '〒904-0004 沖縄県沖縄市中央1丁目27-11-3F'
   assert.equal(storeCardAddress(stores.find((store) => store.slug === 'mimosa-gate2')), gate2Address)
   assert.equal(storeCardAddress(stores.find((store) => store.slug === 'heavens-wagyu-sandwich-gate2')), gate2Address)
+})
+
+test('El, france has the supplied Nago address and a matching Google Maps search link', () => {
+  const elFrance = stores.find((store) => store.slug === 'el-france')
+  assert.deepEqual(elFrance?.address, {
+    ja: '〒905-0016 沖縄県名護市大東1丁目7-14',
+    en: '1-7-14 Daito, Nago, Okinawa 905-0016, Japan',
+    streetAddress: '1-7-14 Daito',
+    locality: 'Nago',
+    postalCode: '905-0016',
+  })
+  assert.equal(new URL(elFrance?.mapUrl ?? '').searchParams.get('query'), '〒905-0016 沖縄県名護市大東1丁目7-14')
+  assert.equal(elFrance?.status, undefined)
 })
 
 test('requested CHURA and wagyu sandwich photos are assigned to their shops', () => {

@@ -126,6 +126,8 @@ export const stores: Store[] = [
       en: { category: 'Teppanyaki steak', description: 'A teppanyaki steak restaurant in Nago, Okinawa.', highlights: [] },
     },
     image: '/images/spots/elfrance.png',
+    address: { ja: '〒905-0016 沖縄県名護市大東1丁目7-14', en: '1-7-14 Daito, Nago, Okinawa 905-0016, Japan', streetAddress: '1-7-14 Daito', locality: 'Nago', postalCode: '905-0016' },
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E3%80%92905-0016%20%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%A4%A7%E6%9D%B11%E4%B8%81%E7%9B%AE7-14',
   },
 ]
 
