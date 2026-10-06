@@ -50,5 +50,6 @@ test('shop cards show verified addresses for every confirmed location', () => {
 
 test('requested CHURA and wagyu sandwich photos are assigned to their shops', () => {
   assert.equal(getStore('bar-chura-kin')?.image, '/images/spots/churakin.png')
+  assert.equal(getStore('mimosa-gate2')?.image, '/images/spots/gate2.jpg')
   assert.equal(getStore('heavens-wagyu-sandwich-gate2')?.image, '/images/spots/gate2.jpg')
 })

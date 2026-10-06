@@ -90,6 +90,7 @@ export const stores: Store[] = [
       ja: { category: 'バー・開業準備中', description: '沖縄市中央で開業準備中のバー。開業日と営業時間は確定後にお知らせします。', highlights: [] },
       en: { category: 'Bar · Preparing to open', description: 'A bar preparing to open in Chuo, Okinawa City. The opening date and hours will be announced when confirmed.', highlights: [] },
     },
+    image: '/images/spots/gate2.jpg',
     address: { ja: '〒904-0004 沖縄県沖縄市中央1丁目27-11-3F', en: '3F, 1-27-11 Chuo, Okinawa, Okinawa 904-0004, Japan', streetAddress: '3F, 1-27-11 Chuo', locality: 'Okinawa', postalCode: '904-0004' },
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E3%80%92904-0004%20%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E4%B8%AD%E5%A4%AE1%E4%B8%81%E7%9B%AE27-11-3F',
   },
