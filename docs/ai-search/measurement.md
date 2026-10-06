@@ -35,3 +35,9 @@ Search Console、Bing Webmaster Tools、Googleビジネスプロフィールの�
 - Googleビジネスプロフィール管理画面: 2026-10-06 18:31に現在のGoogleアカウントで再確認し、「0件のビジネス」「まだビジネスが追加されていません」と表示。対象プロフィールを管理できない。
 
 Search ConsoleとBingは各サービスの管理者による閲覧権限の付与が必要。GBPの指標は、ユーザーが管理画面から共有する。Bing AI Performanceは引用数の集計で、順位や個々のAI回答全体を表す指標ではないため、検索行動や来店行動と分けて解釈する。
+
+### 19:00 JST 再確認
+
+- Search Consoleで `sc-domain:m-i-m-o-s-a.com` を直接指定。ログイン中の `contact.m.i.m.o.s.a.japan@gmail.com` には「このプロパティへのアクセス権がありません」と表示され、閲覧できなかった。
+- Bing Webmaster Toolsはサインイン前の案内画面へ遷移し、登録サイト・AI Performanceレポートを確認できなかった。
+- 権限の追加・所有権確認・サイト登録はいずれも行っていない。Search Console管理者は制限付きユーザー、Bing管理者はRead onlyで招待する必要がある。
