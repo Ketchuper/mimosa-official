@@ -2,20 +2,19 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { stores, publicStores, getStore, storeCardAddress, storePath } from '../lib/stores.ts'
 
-test('the public inventory excludes stores temporarily hidden from the site', () => {
+test('the public inventory shows only Bar REPLICA and El, france', () => {
   assert.deepEqual(publicStores.map((store) => store.slug), [
-    'bar-chura-kin',
-    'mimosa-koza',
-    'mimosa-gate2',
-    'heavens-wagyu-sandwich-gate2',
+    'bar-replica',
+    'el-france',
   ])
+  for (const slug of ['bar-chura-kin', 'tontonton', 'mimosa-koza', 'mimosa-gate2', 'heavens-wagyu-sandwich-gate2']) {
+    assert.equal(stores.find((store) => store.slug === slug)?.isPublic, false)
+    assert.equal(getStore(slug), undefined)
+  }
   assert.equal(stores.find((store) => store.slug === 'tontonton')?.isPublic, false)
-  assert.equal(stores.find((store) => store.slug === 'bar-replica')?.isPublic, false)
-  assert.equal(stores.find((store) => store.slug === 'el-france')?.isPublic, false)
-  assert.equal(getStore('tontonton'), undefined)
-  assert.equal(getStore('bar-replica'), undefined)
-  assert.equal(getStore('el-france'), undefined)
-  assert.equal(getStore('bar-chura-kin')?.name, 'Bar CHURA Kin')
+  assert.equal(getStore('bar-replica')?.name, 'Bar REPLICA')
+  assert.equal(getStore('el-france')?.status, 'closed')
+  assert.equal(stores.find((store) => store.slug === 'bar-chura-kin')?.name, 'Bar CHURA Kin')
   assert.equal(stores.find((store) => store.slug === 'bar-replica')?.name, 'Bar REPLICA')
   const elFrance = stores.find((store) => store.slug === 'el-france')
   assert.equal(elFrance?.name, 'El, france')
@@ -26,9 +25,9 @@ test('the public inventory excludes stores temporarily hidden from the site', ()
 })
 
 test('public store area labels use only formal prefecture and city names', () => {
-  assert.equal(getStore('mimosa-koza')?.area.ja, '沖縄県沖縄市')
-  assert.equal(getStore('mimosa-gate2')?.area.ja, '沖縄県沖縄市')
-  assert.equal(getStore('heavens-wagyu-sandwich-gate2')?.area.ja, '沖縄県沖縄市')
+  assert.equal(stores.find((store) => store.slug === 'mimosa-koza')?.area.ja, '沖縄県沖縄市')
+  assert.equal(stores.find((store) => store.slug === 'mimosa-gate2')?.area.ja, '沖縄県沖縄市')
+  assert.equal(stores.find((store) => store.slug === 'heavens-wagyu-sandwich-gate2')?.area.ja, '沖縄県沖縄市')
   assert.equal(stores.find((store) => store.slug === 'bar-replica')?.area.ja, '沖縄県名護市')
 })
 
@@ -52,16 +51,16 @@ test('store paths are stable and locale-specific', () => {
 
 test('shop cards show verified addresses for every confirmed location', () => {
   assert.equal(
-    storeCardAddress(getStore('mimosa-koza')),
+    storeCardAddress(stores.find((store) => store.slug === 'mimosa-koza')),
     '〒904-0032 沖縄県沖縄市諸見里1丁目25-8 ハピネスプラザビル702',
   )
   const gate2Address = '〒904-0004 沖縄県沖縄市中央1丁目27-11-3F'
-  assert.equal(storeCardAddress(getStore('mimosa-gate2')), gate2Address)
-  assert.equal(storeCardAddress(getStore('heavens-wagyu-sandwich-gate2')), gate2Address)
+  assert.equal(storeCardAddress(stores.find((store) => store.slug === 'mimosa-gate2')), gate2Address)
+  assert.equal(storeCardAddress(stores.find((store) => store.slug === 'heavens-wagyu-sandwich-gate2')), gate2Address)
 })
 
 test('requested CHURA and wagyu sandwich photos are assigned to their shops', () => {
-  assert.equal(getStore('bar-chura-kin')?.image, '/images/spots/churakin.png')
-  assert.equal(getStore('mimosa-gate2')?.image, '/images/spots/gate2.jpg')
-  assert.equal(getStore('heavens-wagyu-sandwich-gate2')?.image, '/images/spots/gate2.jpg')
+  assert.equal(stores.find((store) => store.slug === 'bar-chura-kin')?.image, '/images/spots/churakin.png')
+  assert.equal(stores.find((store) => store.slug === 'mimosa-gate2')?.image, '/images/spots/gate2.jpg')
+  assert.equal(stores.find((store) => store.slug === 'heavens-wagyu-sandwich-gate2')?.image, '/images/spots/gate2.jpg')
 })

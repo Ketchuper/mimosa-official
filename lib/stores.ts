@@ -23,6 +23,7 @@ export const stores: Store[] = [
     slug: 'bar-chura-kin',
     name: 'Bar CHURA Kin',
     status: 'open',
+    isPublic: false,
     category: 'BarOrPub',
     area: { ja: '沖縄県金武町', en: 'Kin, Okinawa' },
     copy: {
@@ -39,7 +40,7 @@ export const stores: Store[] = [
     slug: 'bar-replica',
     name: 'Bar REPLICA',
     status: 'open',
-    isPublic: false,
+    isPublic: true,
     category: 'BarOrPub',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
     copy: {
@@ -72,6 +73,7 @@ export const stores: Store[] = [
     slug: 'mimosa-koza',
     name: 'MIMO$A KOZA',
     status: 'open',
+    isPublic: false,
     category: 'ClothingStore',
     area: { ja: '沖縄県沖縄市', en: 'Okinawa City, Okinawa' },
     copy: {
@@ -87,6 +89,7 @@ export const stores: Store[] = [
     slug: 'mimosa-gate2',
     name: 'MIMO$A GATE2',
     status: 'preopening',
+    isPublic: false,
     category: 'BarOrPub',
     area: { ja: '沖縄県沖縄市', en: 'Okinawa City, Okinawa' },
     copy: {
@@ -101,6 +104,7 @@ export const stores: Store[] = [
     slug: 'heavens-wagyu-sandwich-gate2',
     name: "Heaven's Wagyu Sandwich GATE2",
     status: 'preopening',
+    isPublic: false,
     category: 'Restaurant',
     area: { ja: '沖縄県沖縄市', en: 'Okinawa City, Okinawa' },
     copy: {
@@ -115,7 +119,7 @@ export const stores: Store[] = [
     slug: 'el-france',
     name: 'El, france',
     status: 'closed',
-    isPublic: false,
+    isPublic: true,
     category: 'Restaurant',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
     copy: {
