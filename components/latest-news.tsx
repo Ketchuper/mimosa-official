@@ -3,45 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { getSectionTitles } from "@/lib/i18n"
-
-type NewsTag = "EVENT" | "RELEASE" | "VIDEO"
-
-const newsData: Array<{
-  id: number
-  date: string
-  tag: NewsTag
-  title: string
-  url: string
-}> = [
-  {
-    id: 1,
-    date: "2026.04.05",
-    tag: "EVENT",
-    title: "MIMO$A KOZA 「R&B NIGHT」開催",
-    url: "https://www.instagram.com/p/DWQ0I4DEqYZ/?hl=ja&img_index=1",
-  },
-  {
-    id: 3,
-    date: "2026.02.06",
-    tag: "EVENT",
-    title: "ドキュメンタリー映画「ReSTART」コラボドリンク販売開始",
-    url: "https://www.instagram.com/reel/DUabKs3E0d2/?igsh=NXhtdGx2bzEya3My",
-  },
-  {
-    id: 4,
-    date: "2026.02.02",
-    tag: "EVENT",
-    title: "沖縄アリーナ「VIBE NATION 2026」出演決定",
-    url: "https://www.instagram.com/reel/DUQDGuOkn7W/?igsh=MXRvMDRyMjJiaGVmdQ==",
-  },
-  {
-    id: 7,
-    date: "2026.01.20",
-    tag: "RELEASE",
-    title: "Da-win 「Fly」サブスク配信開始",
-    url: "https://linkco.re/Gc4NavTt?lang=ja",
-  },
-]
+import { newsData } from "@/lib/news"
 
 /* Typing animation for terminal text */
 function TerminalTyping({ text, delay = 0 }: { text: string; delay?: number }) {
