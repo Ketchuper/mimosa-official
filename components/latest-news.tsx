@@ -43,6 +43,28 @@ function TerminalTyping({ text, delay = 0 }: { text: string; delay?: number }) {
 export function LatestNews({ items = homepageNews, showArchiveLink = true }: { items?: NewsItem[]; showArchiveLink?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null)
   const [inView, setInView] = useState(false)
+  const [currentItems, setCurrentItems] = useState(items)
+
+  useEffect(() => {
+    let active = true
+    const refreshNews = async () => {
+      try {
+        const response = await fetch("/api/news", { cache: "no-store" })
+        if (!response.ok) return
+        const payload: { news?: NewsItem[] } = await response.json()
+        if (active && Array.isArray(payload.news)) setCurrentItems(payload.news)
+      } catch {
+        // Keep the bundled news visible if the management sheet is temporarily unavailable.
+      }
+    }
+
+    void refreshNews()
+    const interval = window.setInterval(() => void refreshNews(), 60_000)
+    return () => {
+      active = false
+      window.clearInterval(interval)
+    }
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -85,7 +107,7 @@ export function LatestNews({ items = homepageNews, showArchiveLink = true }: { i
 
         {/* News entries as terminal output */}
         <div className="space-y-0 font-mono">
-          {items.map((item, index) => (
+          {currentItems.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, x: -20 }}
