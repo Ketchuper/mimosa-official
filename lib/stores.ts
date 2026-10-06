@@ -72,10 +72,10 @@ export const stores: Store[] = [
     name: 'MIMO$A KOZA',
     status: 'open',
     category: 'ClothingStore',
-    area: { ja: '沖縄県沖縄市・コザ', en: 'Koza, Okinawa City' },
+    area: { ja: '沖縄県沖縄市', en: 'Okinawa City, Okinawa' },
     copy: {
-      ja: { category: '古着・カルチャー', description: '沖縄市コザの古着と音楽のショップ。ヴィンテージを中心にしたセレクトとイベントを発信しています。', highlights: ['ヴィンテージ', 'セレクト古着', '音楽イベント'] },
-      en: { category: 'Vintage clothing and culture', description: 'A vintage clothing and music shop in Koza, Okinawa City, sharing selected pieces and events.', highlights: ['Vintage clothing', 'Selected pieces', 'Music events'] },
+      ja: { category: '古着・カルチャー', description: '沖縄市の古着と音楽のショップ。ヴィンテージを中心にしたセレクトとイベントを発信しています。', highlights: ['ヴィンテージ', 'セレクト古着', '音楽イベント'] },
+      en: { category: 'Vintage clothing and culture', description: 'A vintage clothing and music shop in Okinawa City, sharing selected pieces and events.', highlights: ['Vintage clothing', 'Selected pieces', 'Music events'] },
     },
     image: '/images/spots/mimosa.png',
     address: { ja: '〒904-0032 沖縄県沖縄市諸見里1丁目25-8 ハピネスプラザビル702', en: 'Happiness Plaza Building 702, 1-25-8 Moromizato, Okinawa, Okinawa 904-0032, Japan', streetAddress: 'Happiness Plaza Building 702, 1-25-8 Moromizato', locality: 'Okinawa', postalCode: '904-0032' },
@@ -87,7 +87,7 @@ export const stores: Store[] = [
     name: 'MIMO$A GATE2',
     status: 'preopening',
     category: 'BarOrPub',
-    area: { ja: '沖縄県沖縄市・ゲート通り周辺', en: 'Gate 2 Street area, Okinawa City' },
+    area: { ja: '沖縄県沖縄市', en: 'Okinawa City, Okinawa' },
     copy: {
       ja: { category: 'バー・開業準備中', description: '沖縄市中央で開業準備中のバー。開業日と営業時間は確定後にお知らせします。', highlights: [] },
       en: { category: 'Bar · Preparing to open', description: 'A bar preparing to open in Chuo, Okinawa City. The opening date and hours will be announced when confirmed.', highlights: [] },
@@ -101,7 +101,7 @@ export const stores: Store[] = [
     name: "Heaven's Wagyu Sandwich GATE2",
     status: 'preopening',
     category: 'Restaurant',
-    area: { ja: '沖縄県沖縄市・ゲート通り周辺', en: 'Gate 2 Street area, Okinawa City' },
+    area: { ja: '沖縄県沖縄市', en: 'Okinawa City, Okinawa' },
     copy: {
       ja: { category: '和牛サンドイッチ・開業準備中', description: '沖縄市中央で和牛サンドイッチ店を準備中です。商品、開業日、営業時間は確定後にお知らせします。', highlights: [] },
       en: { category: 'Wagyu sandwiches · Preparing to open', description: 'A wagyu sandwich shop is preparing to open in Chuo, Okinawa City. Products, opening date and hours will be announced when confirmed.', highlights: [] },

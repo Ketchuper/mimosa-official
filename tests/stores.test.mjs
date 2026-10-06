@@ -17,6 +17,13 @@ test('the public inventory excludes stores temporarily hidden from the site', ()
   assert.ok(publicStores.every((store) => store.name !== 'El, france'))
 })
 
+test('public store area labels use only formal prefecture and city names', () => {
+  assert.equal(getStore('bar-replica')?.area.ja, '沖縄県名護市')
+  assert.equal(getStore('mimosa-koza')?.area.ja, '沖縄県沖縄市')
+  assert.equal(getStore('mimosa-gate2')?.area.ja, '沖縄県沖縄市')
+  assert.equal(getStore('heavens-wagyu-sandwich-gate2')?.area.ja, '沖縄県沖縄市')
+})
+
 test('every live store has a useful action without inventing facts for unopened stores', () => {
   for (const store of publicStores) {
     assert.ok(store.copy.ja.description)

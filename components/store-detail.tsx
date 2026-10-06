@@ -69,15 +69,15 @@ export function StoreDetail({ store, locale }: { store: Store; locale: Locale })
               {store.hours && <p className="mt-2 text-white/80">{store.hours[locale]}</p>}
               {!store.hours && <p className="mt-2 text-sm text-white/60">{en ? 'Please check the latest hours before visiting.' : '営業時間は来店前に最新情報をご確認ください。'}</p>}
               <div className="mt-7 flex flex-wrap gap-3">
-                {store.mapUrl && <a className="rounded bg-primary px-5 py-3 font-bold text-black hover:opacity-85" href={store.mapUrl} target="_blank" rel="noopener noreferrer">{en ? 'Open map' : '地図を見る'}</a>}
-                {store.contactUrl && <a className="rounded border border-white/30 px-5 py-3 font-bold hover:border-primary" href={store.contactUrl} target="_blank" rel="noopener noreferrer">{en ? 'Latest updates / contact' : '最新情報・お問い合わせ'}</a>}
+                {store.mapUrl && <a className="rounded bg-primary px-5 py-3 font-bold text-black hover:opacity-85" href={store.mapUrl} target="_blank" rel="noopener noreferrer">{en ? 'Google Maps' : 'Googleマップ'}</a>}
+                {store.contactUrl && <a className="rounded border border-white/30 px-5 py-3 font-bold hover:border-primary" href={store.contactUrl} target="_blank" rel="noopener noreferrer">{en ? 'Instagram' : 'インスタグラム'}</a>}
               </div>
             </>
           ) : (
             <>
               {store.address && <p className="mt-5 text-white/80">{store.address[locale]}</p>}
               <p className="mt-2 max-w-2xl leading-8 text-white/75">{en ? 'This location is preparing to open. We will share its opening date and contact details after they are confirmed.' : '現在、開業準備中です。開業日・連絡先は確定後にご案内します。'}</p>
-              {store.mapUrl && <div className="mt-7"><a className="rounded bg-primary px-5 py-3 font-bold text-black hover:opacity-85" href={store.mapUrl} target="_blank" rel="noopener noreferrer">{en ? 'Open map' : '地図を見る'}</a></div>}
+              {store.mapUrl && <div className="mt-7"><a className="rounded bg-primary px-5 py-3 font-bold text-black hover:opacity-85" href={store.mapUrl} target="_blank" rel="noopener noreferrer">{en ? 'Google Maps' : 'Googleマップ'}</a></div>}
             </>
           )}
         </section>
