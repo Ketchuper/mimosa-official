@@ -1,3 +1,3 @@
 period,store_slug,google_ai_impressions,bing_ai_citations,gbp_directions,gbp_calls,gbp_website_clicks,reservations_or_orders,notes
-baseline-2026-10-06,bar-replica,,,,,,,account_access_pending
-baseline-2026-10-06,el-france,,,,,,,account_access_pending;gbp_status_conflict
+baseline-2026-10-06,bar-replica,,,,,,,gsc_permission_pending;bing_login_pending;gbp_manager_empty
+baseline-2026-10-06,el-france,,,,,,,gsc_permission_pending;bing_login_pending;gbp_manager_empty;gbp_status_needs_confirmation

@@ -1,18 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { publicStores, storePath } from '@/lib/stores'
 import { SITE_URL } from '@/lib/store-seo'
+import { buildSitemapEntries } from '@/lib/sitemap-data.mjs'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    { url: SITE_URL },
-    ...publicStores.flatMap((store) => (['ja', 'en'] as const).map((locale) => ({
-      url: `${SITE_URL}${storePath(store.slug, locale)}`,
-      alternates: {
-        languages: {
-          ja: `${SITE_URL}${storePath(store.slug, 'ja')}`,
-          en: `${SITE_URL}${storePath(store.slug, 'en')}`,
-        },
-      },
-    }))),
-  ]
+  return buildSitemapEntries({ siteUrl: SITE_URL, stores: publicStores, pathForStore: storePath })
 }
