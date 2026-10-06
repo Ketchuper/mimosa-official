@@ -15,7 +15,7 @@ export function SpotsSection() {
           <h2 className="font-[var(--font-display)] text-5xl text-foreground md:text-7xl">
             {getSectionTitles().spots.prefix}<span className="text-primary neon-glow">{getSectionTitles().spots.highlight}</span>
           </h2>
-          <p className="mt-3 max-w-xl text-sm text-muted-foreground">MIMO$Aの店舗と開業準備中の拠点</p>
+          <p className="mt-3 max-w-xl text-sm text-muted-foreground">MIMO$Aの店舗、開業準備中の拠点、過去に運営した店舗</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {publicStores.map((store, index) => (
@@ -26,13 +26,14 @@ export function SpotsSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <span className="inline-block rounded bg-primary px-2 py-1 text-xs font-bold text-black">{store.area.ja}</span>
-                    <p className="mt-2 text-xs font-medium leading-5 text-white drop-shadow-md">{storeCardAddress(store)}</p>
+                    {store.status === 'closed' && <span className="ml-2 inline-block rounded border border-white/70 bg-black/70 px-2 py-1 text-xs font-bold text-white">閉店</span>}
+                    {storeCardAddress(store) && <p className="mt-2 text-xs font-medium leading-5 text-white drop-shadow-md">{storeCardAddress(store)}</p>}
                   </div>
                 </div>
                 <div className="p-5">
                   <h3 className="font-[var(--font-display)] text-xl transition-colors group-hover:text-primary md:text-2xl">{store.name}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{store.copy.ja.category}</p>
-                  <span className="mt-4 inline-block text-sm text-primary">{store.status === 'open' ? '店舗情報を見る →' : '開業準備中の情報を見る →'}</span>
+                  <span className="mt-4 inline-block text-sm text-primary">{store.status === 'open' ? '店舗情報を見る →' : store.status === 'preopening' ? '開業準備中の情報を見る →' : '過去の店舗情報を見る →'}</span>
                 </div>
               </motion.article>
             </Link>

@@ -9,12 +9,18 @@ test('the public inventory excludes stores temporarily hidden from the site', ()
     'mimosa-koza',
     'mimosa-gate2',
     'heavens-wagyu-sandwich-gate2',
+    'el-france',
   ])
   assert.equal(stores.find((store) => store.slug === 'tontonton')?.isPublic, false)
   assert.equal(getStore('tontonton'), undefined)
   assert.equal(getStore('bar-chura-kin')?.name, 'Bar CHURA Kin')
   assert.equal(getStore('bar-replica')?.name, 'Bar REPLICA')
-  assert.ok(publicStores.every((store) => store.name !== 'El, france'))
+  const elFrance = getStore('el-france')
+  assert.equal(elFrance?.name, 'El, france')
+  assert.equal(elFrance?.status, 'closed')
+  assert.equal(elFrance?.address, undefined)
+  assert.equal(elFrance?.hours, undefined)
+  assert.equal(elFrance?.mapUrl, undefined)
 })
 
 test('public store area labels use only formal prefecture and city names', () => {
@@ -24,7 +30,7 @@ test('public store area labels use only formal prefecture and city names', () =>
   assert.equal(getStore('heavens-wagyu-sandwich-gate2')?.area.ja, '沖縄県沖縄市')
 })
 
-test('every live store has a useful action without inventing facts for unopened stores', () => {
+test('public store pages explain their status without inventing facts', () => {
   for (const store of publicStores) {
     assert.ok(store.copy.ja.description)
     assert.ok(store.copy.en.description)

@@ -1,5 +1,5 @@
 export type Locale = 'ja' | 'en'
-export type StoreStatus = 'open' | 'preopening'
+export type StoreStatus = 'open' | 'preopening' | 'closed'
 
 export type Store = {
   slug: string
@@ -110,6 +110,18 @@ export const stores: Store[] = [
     address: { ja: '〒904-0004 沖縄県沖縄市中央1丁目27-11-3F', en: '3F, 1-27-11 Chuo, Okinawa, Okinawa 904-0004, Japan', streetAddress: '3F, 1-27-11 Chuo', locality: 'Okinawa', postalCode: '904-0004' },
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E3%80%92904-0004%20%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82%E4%B8%AD%E5%A4%AE1%E4%B8%81%E7%9B%AE27-11-3F',
   },
+  {
+    slug: 'el-france',
+    name: 'El, france',
+    status: 'closed',
+    category: 'Restaurant',
+    area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
+    copy: {
+      ja: { category: '鉄板焼きステーキ・閉店済み', description: '名護市で営業していた鉄板焼きステーキ店です。現在は閉店しています。', highlights: [] },
+      en: { category: 'Teppanyaki steak · Closed', description: 'A teppanyaki steak restaurant formerly operated in Nago, Okinawa. It is now closed.', highlights: [] },
+    },
+    image: '/images/spots/elfrance.png',
+  },
 ]
 
 export const publicStores = stores.filter((store) => store.isPublic !== false)
@@ -124,5 +136,6 @@ export function storePath(slug: string, locale: Locale) {
 
 export function storeCardAddress(store: Store | undefined) {
   if (!store) return ''
+  if (store.status === 'closed') return ''
   return store.address?.ja ?? '住所は開業時にご案内'
 }

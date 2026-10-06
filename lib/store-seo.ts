@@ -7,7 +7,12 @@ function pathFor(store: Store, locale: Locale) {
 }
 
 export function storeMetadata(store: Store, locale: Locale) {
-  const title = `${store.name} | ${store.area[locale]}${store.status === 'preopening' ? (locale === 'ja' ? '・開業準備中' : ' · Preparing to open') : ''} | MIMO$A`
+  const statusLabel = store.status === 'preopening'
+    ? (locale === 'ja' ? '・開業準備中' : ' · Preparing to open')
+    : store.status === 'closed'
+      ? (locale === 'ja' ? '・閉店' : ' · Closed')
+      : ''
+  const title = `${store.name} | ${store.area[locale]}${statusLabel} | MIMO$A`
   const path = pathFor(store, locale)
   return {
     title,
