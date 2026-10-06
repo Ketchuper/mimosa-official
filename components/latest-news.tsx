@@ -178,11 +178,11 @@ export function LatestNews({ items = homepageNews, showArchiveLink = true }: { i
             <Link
               href="/news"
               data-hover
-              className="group inline-flex min-h-11 items-center gap-2 border border-primary/40 bg-transparent px-5 py-3 font-mono text-sm font-bold tracking-wide text-primary transition-all duration-300 hover:border-primary hover:bg-primary hover:text-black hover:shadow-[0_0_18px_rgba(43,166,27,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+              className="group inline-flex min-h-11 items-center gap-2 py-3 font-sans text-base font-medium leading-6 text-foreground/75 transition-colors duration-300 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              <span aria-hidden="true" className="text-primary/50 transition-colors group-hover:text-black/70">{'>'}</span>
+              <span aria-hidden="true" className="text-primary/60 transition-colors group-hover:text-primary">{'>'}</span>
               <span>ニュースをすべて見る</span>
-              <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">{'->'}</span>
+              <span aria-hidden="true" className="text-primary/60 transition-transform group-hover:translate-x-1 group-hover:text-primary">{'->'}</span>
             </Link>
           </div>
         )}
