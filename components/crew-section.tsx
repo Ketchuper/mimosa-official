@@ -84,15 +84,6 @@ const crewData: CrewMember[] = [
       { href: "https://www.tunecore.co.jp/artists?id=1025502&lang=ja", label: "Music (TuneCore)", icon: "music" },
     ],
   },
-  {
-    id: 3,
-    name: "Teihen Influencer",
-    role: "Creator",
-    image: "/images/teihen.png",
-    social: [
-      { href: "https://www.instagram.com/teihen.influencer/", label: "Instagram", icon: "instagram" },
-    ],
-  },
 ];
 
 function DaWinCard({ member, priority }: { member: CrewMember; priority?: boolean }) {

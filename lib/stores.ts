@@ -5,6 +5,7 @@ export type Store = {
   slug: string
   name: string
   status: StoreStatus
+  isPublic?: boolean
   category: 'BarOrPub' | 'Restaurant' | 'ClothingStore'
   area: { ja: string; en: string }
   copy: Record<Locale, { category: string; description: string; highlights: string[] }>
@@ -53,6 +54,7 @@ export const stores: Store[] = [
     slug: 'tontonton',
     name: '豚豚豚 金武本店',
     status: 'open',
+    isPublic: false,
     category: 'Restaurant',
     area: { ja: '沖縄県金武町', en: 'Kin, Okinawa' },
     copy: {
@@ -110,8 +112,10 @@ export const stores: Store[] = [
   },
 ]
 
+export const publicStores = stores.filter((store) => store.isPublic !== false)
+
 export function getStore(slug: string) {
-  return stores.find((store) => store.slug === slug)
+  return publicStores.find((store) => store.slug === slug)
 }
 
 export function storePath(slug: string, locale: Locale) {

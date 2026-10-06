@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { stores, storeCardAddress, storePath } from '@/lib/stores'
+import { publicStores, storeCardAddress, storePath } from '@/lib/stores'
 import { getSectionTitles } from '@/lib/i18n'
 
 export function SpotsSection() {
@@ -18,7 +18,7 @@ export function SpotsSection() {
           <p className="mt-3 max-w-xl text-sm text-muted-foreground">MIMO$Aの店舗と開業準備中の拠点</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
-          {stores.map((store, index) => (
+          {publicStores.map((store, index) => (
             <Link key={store.slug} href={storePath(store.slug, 'ja')} className="group block rounded-lg border border-primary/15 bg-card transition-colors hover:border-primary/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
               <motion.article initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.06 }}>
                 <div className="relative aspect-square overflow-hidden rounded-t-lg bg-gradient-to-br from-[#153811] via-[#111] to-black">

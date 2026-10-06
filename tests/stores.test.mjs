@@ -1,26 +1,24 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { stores, getStore, storeCardAddress, storePath } from '../lib/stores.ts'
+import { stores, publicStores, getStore, storeCardAddress, storePath } from '../lib/stores.ts'
 
-test('the public inventory contains exactly the six confirmed stores', () => {
-  assert.deepEqual(stores.map((store) => store.slug), [
+test('the public inventory excludes stores temporarily hidden from the site', () => {
+  assert.deepEqual(publicStores.map((store) => store.slug), [
     'bar-chura-kin',
     'bar-replica',
-    'tontonton',
     'mimosa-koza',
     'mimosa-gate2',
     'heavens-wagyu-sandwich-gate2',
   ])
-  assert.deepEqual(stores.map((store) => store.status), [
-    'open', 'open', 'open', 'open', 'preopening', 'preopening',
-  ])
+  assert.equal(stores.find((store) => store.slug === 'tontonton')?.isPublic, false)
+  assert.equal(getStore('tontonton'), undefined)
   assert.equal(getStore('bar-chura-kin')?.name, 'Bar CHURA Kin')
   assert.equal(getStore('bar-replica')?.name, 'Bar REPLICA')
-  assert.ok(stores.every((store) => store.name !== 'El, france'))
+  assert.ok(publicStores.every((store) => store.name !== 'El, france'))
 })
 
 test('every live store has a useful action without inventing facts for unopened stores', () => {
-  for (const store of stores) {
+  for (const store of publicStores) {
     assert.ok(store.copy.ja.description)
     assert.ok(store.copy.en.description)
     if (store.status === 'open') assert.ok(store.mapUrl || store.contactUrl)
@@ -29,7 +27,6 @@ test('every live store has a useful action without inventing facts for unopened 
       assert.equal(store.phone, undefined)
     }
   }
-  assert.equal(getStore('tontonton')?.hours, undefined)
 })
 
 test('store paths are stable and locale-specific', () => {

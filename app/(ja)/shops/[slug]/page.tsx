@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { StoreDetail } from '@/components/store-detail'
-import { getStore, stores } from '@/lib/stores'
+import { getStore, publicStores } from '@/lib/stores'
 import { storeMetadata } from '@/lib/store-seo'
 
 type Props = { params: Promise<{ slug: string }> }
 
 export function generateStaticParams() {
-  return stores.map(({ slug }) => ({ slug }))
+  return publicStores.map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
