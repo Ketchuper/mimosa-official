@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { getSectionTitles } from "@/lib/i18n"
-import { homepageNews, type NewsItem } from "@/lib/news"
+import { HOMEPAGE_NEWS_LIMIT, homepageNews, type NewsItem } from "@/lib/news"
 
 /* Typing animation for terminal text */
 function TerminalTyping({ text, delay = 0 }: { text: string; delay?: number }) {
@@ -52,7 +52,9 @@ export function LatestNews({ items = homepageNews, showArchiveLink = true }: { i
         const response = await fetch("/api/news", { cache: "no-store" })
         if (!response.ok) return
         const payload: { news?: NewsItem[] } = await response.json()
-        if (active && Array.isArray(payload.news)) setCurrentItems(payload.news)
+        if (active && Array.isArray(payload.news)) {
+          setCurrentItems(showArchiveLink ? payload.news.slice(0, HOMEPAGE_NEWS_LIMIT) : payload.news)
+        }
       } catch {
         // Keep the bundled news visible if the management sheet is temporarily unavailable.
       }
@@ -64,7 +66,7 @@ export function LatestNews({ items = homepageNews, showArchiveLink = true }: { i
       active = false
       window.clearInterval(interval)
     }
-  }, [])
+  }, [showArchiveLink])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
