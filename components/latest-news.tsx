@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
+import Link from "next/link"
 import { getSectionTitles } from "@/lib/i18n"
-import { newsData } from "@/lib/news"
+import { homepageNews, type NewsItem } from "@/lib/news"
 
 /* Typing animation for terminal text */
 function TerminalTyping({ text, delay = 0 }: { text: string; delay?: number }) {
@@ -39,7 +40,7 @@ function TerminalTyping({ text, delay = 0 }: { text: string; delay?: number }) {
   )
 }
 
-export function LatestNews() {
+export function LatestNews({ items = homepageNews, showArchiveLink = true }: { items?: NewsItem[]; showArchiveLink?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null)
   const [inView, setInView] = useState(false)
 
@@ -57,6 +58,7 @@ export function LatestNews() {
   return (
     <section
       ref={sectionRef}
+      id="news"
       className="relative py-24 md:py-32 px-4 md:px-8 bg-background overflow-hidden"
     >
       <div className="max-w-6xl mx-auto relative">
@@ -83,7 +85,7 @@ export function LatestNews() {
 
         {/* News entries as terminal output */}
         <div className="space-y-0 font-mono">
-          {newsData.map((item, index) => (
+          {items.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, x: -20 }}
@@ -146,6 +148,14 @@ export function LatestNews() {
             </motion.div>
           ))}
         </div>
+
+        {showArchiveLink && (
+          <div className="mt-10">
+            <Link href="/news" className="inline-flex rounded border border-primary px-5 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-black">
+              ニュースをすべて見る →
+            </Link>
+          </div>
+        )}
 
       </div>
     </section>

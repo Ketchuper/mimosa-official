@@ -80,3 +80,6 @@ export const newsData: NewsItem[] = [
     url: 'https://linkco.re/HSg6H3cq?lang=ja',
   },
 ]
+
+export const HOMEPAGE_NEWS_LIMIT = 5
+export const homepageNews = newsData.slice(0, HOMEPAGE_NEWS_LIMIT)

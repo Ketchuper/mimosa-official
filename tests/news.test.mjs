@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { newsData } from '../lib/news.ts'
+import { HOMEPAGE_NEWS_LIMIT, homepageNews, newsData } from '../lib/news.ts'
 
 test('Da-win releases use their verified TuneCore dates and release pages', () => {
   const releases = newsData.filter((item) => item.tag === 'RELEASE')
@@ -17,4 +17,11 @@ test('Da-win releases use their verified TuneCore dates and release pages', () =
       { date: '2025.09.06', title: 'Da-win 「OLD IS NEW (feat. DJ Fourd Nkay)」サブスク配信開始', url: 'https://linkco.re/HSg6H3cq?lang=ja' },
     ],
   )
+})
+
+test('the homepage shows five recent items and keeps the full archive available', () => {
+  assert.equal(HOMEPAGE_NEWS_LIMIT, 5)
+  assert.equal(homepageNews.length, HOMEPAGE_NEWS_LIMIT)
+  assert.deepEqual(homepageNews, newsData.slice(0, HOMEPAGE_NEWS_LIMIT))
+  assert.ok(newsData.length > homepageNews.length)
 })
