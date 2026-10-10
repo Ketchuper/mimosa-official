@@ -140,8 +140,3 @@ export function getStore(slug: string) {
 export function storePath(slug: string, locale: Locale) {
   return `${locale === 'en' ? '/en' : ''}/shops/${slug}`
 }
-
-export function storeCardAddress(store: Store | undefined) {
-  if (!store) return ''
-  return store.address?.ja ?? '住所は開業時にご案内'
-}

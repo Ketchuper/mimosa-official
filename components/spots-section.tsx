@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { publicStores, storeCardAddress, storePath } from '@/lib/stores'
+import { publicStores, storePath } from '@/lib/stores'
 import { getSectionTitles } from '@/lib/i18n'
 
 export function SpotsSection() {
@@ -26,7 +26,6 @@ export function SpotsSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <span className="inline-block rounded bg-primary px-2 py-1 text-xs font-bold text-black">{store.area.ja}</span>
-                    {storeCardAddress(store) && <p className="mt-2 text-xs font-medium leading-5 text-white drop-shadow-md">{storeCardAddress(store)}</p>}
                   </div>
                 </div>
                 <div className="p-5">

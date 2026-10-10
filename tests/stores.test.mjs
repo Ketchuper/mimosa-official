@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { stores, publicStores, getStore, storeCardAddress, storePath } from '../lib/stores.ts'
+import { stores, publicStores, getStore, storePath } from '../lib/stores.ts'
 
 test('the public inventory shows only Bar REPLICA and El, france', () => {
   assert.deepEqual(publicStores.map((store) => store.slug), [
@@ -50,14 +50,12 @@ test('store paths are stable and locale-specific', () => {
   assert.equal(getStore('not-a-store'), undefined)
 })
 
-test('shop cards show verified addresses for every confirmed location', () => {
-  assert.equal(
-    storeCardAddress(stores.find((store) => store.slug === 'mimosa-koza')),
-    '〒904-0032 沖縄県沖縄市諸見里1丁目25-8 ハピネスプラザビル702',
-  )
-  const gate2Address = '〒904-0004 沖縄県沖縄市中央1丁目27-11-3F'
-  assert.equal(storeCardAddress(stores.find((store) => store.slug === 'mimosa-gate2')), gate2Address)
-  assert.equal(storeCardAddress(stores.find((store) => store.slug === 'heavens-wagyu-sandwich-gate2')), gate2Address)
+test('store cards use area labels while detail pages retain full addresses', () => {
+  for (const store of publicStores) {
+    assert.ok(store.address?.ja.includes(store.area.ja))
+  }
+  assert.equal(stores.find((store) => store.slug === 'bar-replica')?.area.ja, '沖縄県名護市')
+  assert.equal(stores.find((store) => store.slug === 'el-france')?.area.ja, '沖縄県名護市')
 })
 
 test('El, france has the supplied Nago address and a matching Google Maps search link', () => {
