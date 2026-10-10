@@ -1,21 +1,11 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
-import { Anton, Inter } from 'next/font/google'
+import { anton, inter } from '@/lib/fonts'
 import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
-
-const anton = Anton({ 
-  weight: '400',
-  subsets: ["latin"],
-  variable: '--font-anton'
-})
-
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter'
-})
+import '../globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.m-i-m-o-s-a.com'),
   title: 'MIMO$A | Creative crew BASED IN OKINAWA',
   description: 'MIMO$A - A creative crew from Okinawa pushing boundaries in entertainment and fashion.',
   generator: 'v0.app',
@@ -32,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="ja" className="dark">
       <body className={`${anton.variable} ${inter.variable} font-sans antialiased`}>
         {children}
         <Analytics />
