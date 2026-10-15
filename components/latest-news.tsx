@@ -2,46 +2,9 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
+import Link from "next/link"
 import { getSectionTitles } from "@/lib/i18n"
-
-type NewsTag = "EVENT" | "RELEASE" | "VIDEO"
-
-const newsData: Array<{
-  id: number
-  date: string
-  tag: NewsTag
-  title: string
-  url: string
-}> = [
-  {
-    id: 1,
-    date: "2026.04.05",
-    tag: "EVENT",
-    title: "MIMO$A KOZA 「R&B NIGHT」開催",
-    url: "https://www.instagram.com/p/DWQ0I4DEqYZ/?hl=ja&img_index=1",
-  },
-  {
-    id: 3,
-    date: "2026.02.06",
-    tag: "EVENT",
-    title: "ドキュメンタリー映画「ReSTART」コラボドリンク販売開始",
-    url: "https://www.instagram.com/reel/DUabKs3E0d2/?igsh=NXhtdGx2bzEya3My",
-  },
-  {
-    id: 4,
-    date: "2026.02.02",
-    tag: "EVENT",
-    title: "沖縄アリーナ「VIBE NATION 2026」出演決定",
-    url: "https://www.instagram.com/reel/DUQDGuOkn7W/?igsh=MXRvMDRyMjJiaGVmdQ==",
-  },
-  {
-    id: 7,
-    date: "2026.01.20",
-    tag: "RELEASE",
-    title: "Da-win 「Fly」サブスク配信開始",
-    url: "https://linkco.re/Gc4NavTt?lang=ja",
-  },
-]
+import { HOMEPAGE_NEWS_LIMIT, homepageNews, type NewsItem } from "@/lib/news"
 
 /* Typing animation for terminal text */
 function TerminalTyping({ text, delay = 0 }: { text: string; delay?: number }) {
@@ -77,9 +40,33 @@ function TerminalTyping({ text, delay = 0 }: { text: string; delay?: number }) {
   )
 }
 
-export function LatestNews() {
+export function LatestNews({ items = homepageNews, showArchiveLink = true }: { items?: NewsItem[]; showArchiveLink?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null)
   const [inView, setInView] = useState(false)
+  const [currentItems, setCurrentItems] = useState(items)
+
+  useEffect(() => {
+    let active = true
+    const refreshNews = async () => {
+      try {
+        const response = await fetch("/api/news", { cache: "no-store" })
+        if (!response.ok) return
+        const payload: { news?: NewsItem[] } = await response.json()
+        if (active && Array.isArray(payload.news)) {
+          setCurrentItems(showArchiveLink ? payload.news.slice(0, HOMEPAGE_NEWS_LIMIT) : payload.news)
+        }
+      } catch {
+        // Keep the bundled news visible if the management sheet is temporarily unavailable.
+      }
+    }
+
+    void refreshNews()
+    const interval = window.setInterval(() => void refreshNews(), 60_000)
+    return () => {
+      active = false
+      window.clearInterval(interval)
+    }
+  }, [showArchiveLink])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -95,6 +82,7 @@ export function LatestNews() {
   return (
     <section
       ref={sectionRef}
+      id="news"
       className="relative py-24 md:py-32 px-4 md:px-8 bg-background overflow-hidden"
     >
       <div className="max-w-6xl mx-auto relative">
@@ -121,7 +109,7 @@ export function LatestNews() {
 
         {/* News entries as terminal output */}
         <div className="space-y-0 font-mono">
-          {newsData.map((item, index) => (
+          {currentItems.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, x: -20 }}
@@ -184,6 +172,20 @@ export function LatestNews() {
             </motion.div>
           ))}
         </div>
+
+        {showArchiveLink && (
+          <div className="mt-10">
+            <Link
+              href="/news"
+              data-hover
+              className="group inline-flex min-h-11 items-center gap-2 py-3 font-sans text-base font-medium leading-6 text-foreground/75 transition-colors duration-300 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <span aria-hidden="true" className="text-primary/60 transition-colors group-hover:text-primary">{'>'}</span>
+              <span>ニュースをすべて見る</span>
+              <span aria-hidden="true" className="text-primary/60 transition-transform group-hover:translate-x-1 group-hover:text-primary">{'->'}</span>
+            </Link>
+          </div>
+        )}
 
       </div>
     </section>
