@@ -13,15 +13,22 @@ test('the public inventory shows only Bar REPLICA and El, france', () => {
   }
   assert.equal(stores.find((store) => store.slug === 'tontonton')?.isPublic, false)
   assert.equal(getStore('bar-replica')?.name, 'Bar REPLICA')
-  assert.equal(getStore('el-france')?.status, undefined)
+  assert.equal(getStore('el-france')?.status, 'open')
   assert.equal(stores.find((store) => store.slug === 'bar-chura-kin')?.name, 'Bar CHURA Kin')
   assert.equal(stores.find((store) => store.slug === 'bar-replica')?.name, 'Bar REPLICA')
   const elFrance = stores.find((store) => store.slug === 'el-france')
   assert.equal(elFrance?.name, 'El, france')
-  assert.equal(elFrance?.status, undefined)
+  assert.equal(elFrance?.status, 'open')
   assert.doesNotMatch(`${elFrance?.copy.ja.category} ${elFrance?.copy.ja.description} ${elFrance?.copy.en.category} ${elFrance?.copy.en.description}`, /閉店|閉業|Closed|formerly|no longer open/i)
   assert.ok(elFrance?.address)
-  assert.equal(elFrance?.hours, undefined)
+  assert.deepEqual(elFrance?.hours, {
+    ja: '営業時間 11:30–22:00（ラストオーダー 21:30）',
+    en: 'Hours 11:30–22:00 (last order 21:30)',
+  })
+  assert.deepEqual(stores.find((store) => store.slug === 'bar-replica')?.hours, {
+    ja: '営業時間 19:00–0:00',
+    en: 'Hours 19:00–0:00',
+  })
   assert.ok(elFrance?.mapUrl)
 })
 
@@ -68,7 +75,7 @@ test('El, france has the supplied Nago address and a matching Google Maps search
     postalCode: '905-0016',
   })
   assert.equal(new URL(elFrance?.mapUrl ?? '').searchParams.get('query'), '〒905-0016 沖縄県名護市大東1丁目7-14')
-  assert.equal(elFrance?.status, undefined)
+  assert.equal(elFrance?.status, 'open')
 })
 
 test('requested CHURA and wagyu sandwich photos are assigned to their shops', () => {

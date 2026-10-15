@@ -49,6 +49,7 @@ export const stores: Store[] = [
     },
     image: '/images/spots/replica.png',
     address: { ja: '〒905-0013 沖縄県名護市城1-1-17', en: '1-1-17 Gusuku, Nago, Okinawa 905-0013, Japan', streetAddress: '1-1-17 Gusuku', locality: 'Nago', postalCode: '905-0013' },
+    hours: { ja: '営業時間 19:00–0:00', en: 'Hours 19:00–0:00' },
     mapUrl: 'https://maps.app.goo.gl/AGW5uiUUDS81NQBi9',
     contactUrl: 'https://www.instagram.com/replica.nago/',
   },
@@ -118,6 +119,7 @@ export const stores: Store[] = [
   {
     slug: 'el-france',
     name: 'El, france',
+    status: 'open',
     isPublic: true,
     category: 'Restaurant',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
@@ -127,6 +129,7 @@ export const stores: Store[] = [
     },
     image: '/images/spots/elfrance.png',
     address: { ja: '〒905-0016 沖縄県名護市大東1丁目7-14', en: '1-7-14 Daito, Nago, Okinawa 905-0016, Japan', streetAddress: '1-7-14 Daito', locality: 'Nago', postalCode: '905-0016' },
+    hours: { ja: '営業時間 11:30–22:00（ラストオーダー 21:30）', en: 'Hours 11:30–22:00 (last order 21:30)' },
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=%E3%80%92905-0016%20%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82%E5%A4%A7%E6%9D%B11%E4%B8%81%E7%9B%AE7-14',
   },
 ]

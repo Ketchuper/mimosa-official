@@ -30,7 +30,10 @@ test('preopening stores do not claim an open street business', () => {
 
 test('El, france has no closure claim in its public copy or SEO metadata', () => {
   const elFrance = stores.find((store) => store.slug === 'el-france')
-  assert.equal(localBusinessJsonLd(elFrance, 'ja'), undefined)
+  const data = localBusinessJsonLd(elFrance, 'ja')
+  assert.equal(data['@type'], 'Restaurant')
+  assert.equal(data.name, 'El, france')
+  assert.equal(data.openingHoursSpecification, undefined)
   const metadata = storeMetadata(elFrance, 'ja')
   assert.doesNotMatch(`${metadata.title} ${metadata.description} ${elFrance.copy.en.description} ${elFrance.copy.ja.category} ${elFrance.copy.ja.description}`, /閉店|閉業|Closed|formerly|no longer open|過去に運営/i)
 })
