@@ -6,6 +6,7 @@ export type Store = {
   name: string
   status?: StoreStatus
   isPublic?: boolean
+  sitemapLastModified?: string
   category: 'BarOrPub' | 'Restaurant' | 'ClothingStore'
   area: { ja: string; en: string }
   copy: Record<Locale, { category: string; description: string; highlights: string[] }>
@@ -41,6 +42,7 @@ export const stores: Store[] = [
     name: 'Bar REPLICA',
     status: 'open',
     isPublic: true,
+    sitemapLastModified: '2026-10-15',
     category: 'BarOrPub',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
     copy: {
@@ -121,6 +123,7 @@ export const stores: Store[] = [
     name: 'El, france',
     status: 'open',
     isPublic: true,
+    sitemapLastModified: '2026-10-15',
     category: 'Restaurant',
     area: { ja: '沖縄県名護市', en: 'Nago, Okinawa' },
     copy: {
