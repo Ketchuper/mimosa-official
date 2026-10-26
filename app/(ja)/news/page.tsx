@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { LatestNews } from '@/components/latest-news'
 import { newsData } from '@/lib/news'
+import { newsPageJsonLd } from '@/lib/site-structured-data'
+import { SITE_URL } from '@/lib/store-seo'
 
 export const metadata: Metadata = {
   title: 'ニュース | MIMO$A',
@@ -9,8 +11,14 @@ export const metadata: Metadata = {
 }
 
 export default function NewsPage() {
+  const jsonLd = newsPageJsonLd(SITE_URL)
+
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
       <header className="border-b border-white/10 px-5 py-5 md:px-10">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <Link className="font-[var(--font-display)] text-2xl tracking-wider" href="/">MIMO$A</Link>

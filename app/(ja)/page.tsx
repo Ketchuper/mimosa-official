@@ -1,5 +1,3 @@
-"use client"
-
 import { CustomCursor } from "@/components/custom-cursor"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { HeroSection } from "@/components/hero-section"
@@ -13,25 +11,35 @@ import { BookUsCta } from "@/components/book-us-cta"
 import { ContactSection } from "@/components/contact-section"
 import { FloatingPlayer } from "@/components/floating-player"
 import { Footer } from "@/components/footer"
+import { homepageJsonLd } from '@/lib/site-structured-data'
+import { SITE_URL } from '@/lib/store-seo'
 
 export default function Home() {
-  return (
-    <SmoothScroll>
-      <main className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
-        <CustomCursor />
+  const jsonLd = homepageJsonLd(SITE_URL)
 
-        <HeroSection />
-        <LatestNews />
-        <SpotsSection />
-        <BusinessSection />
-        <CompanySection />
-        <CrewSection />
-        <PartnersMarquee />
-        <BookUsCta />
-        <ContactSection />
-        <Footer />
-        <FloatingPlayer />
-      </main>
-    </SmoothScroll>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
+      <SmoothScroll>
+        <main className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+          <CustomCursor />
+
+          <HeroSection />
+          <LatestNews />
+          <SpotsSection />
+          <BusinessSection />
+          <CompanySection />
+          <CrewSection />
+          <PartnersMarquee />
+          <BookUsCta />
+          <ContactSection />
+          <Footer />
+          <FloatingPlayer />
+        </main>
+      </SmoothScroll>
+    </>
   )
 }

@@ -10,6 +10,8 @@ test('open stores with a verified street address receive localized LocalBusiness
   assert.equal(data.name, 'Bar REPLICA')
   assert.equal(data.address['@type'], 'PostalAddress')
   assert.equal(data.address.postalCode, '905-0013')
+  assert.equal(data.hasMap, replica.mapUrl)
+  assert.equal(data.parentOrganization['@id'], 'https://www.m-i-m-o-s-a.com/#organization')
   assert.equal(data.openingHoursSpecification, undefined)
 })
 
