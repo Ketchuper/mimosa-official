@@ -83,4 +83,4 @@
 - 生成HTMLで `/`・`/news` と日英の店舗詳細4URLすべてにcanonical、OGP、Xカードが出ることを確認。店舗詳細の日英hreflangは維持。英語版のホーム・ニュースに対応する実ページがないため、存在しないURLへのhreflangは追加していない。
 - 確認: `node --test tests/*.test.mjs` 19/19成功、`npx next build --webpack`成功、`git diff --check`成功。
 - 変更ファイル: `lib/store-seo.ts`、`app/(ja)/page.tsx`、`app/(ja)/news/page.tsx`、`tests/store-seo.test.mjs`。
-- 現在はブランチ`codex/robots-txt-ai-bots`のローカル未コミット変更。本番サイト・PR・公開設定は変更していない。プレビューおよび本番URLでの確認後に工程8・9を完了扱いにする。
+- 変更は既存PR #1（https://github.com/Ketchuper/mimosa-official/pull/1）へ反映済み。現在のheadは`92ccce34b5668ad62df7702e9dc80ce443a28dea`、PRはOPEN・未マージ。本番サイトは未変更。Vercelの2チェックは確認時点でpendingのため、プレビュー生成後に表示を確認してから工程8・9を完了扱いにする。
