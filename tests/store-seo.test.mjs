@@ -1,7 +1,33 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { stores } from '../lib/stores.ts'
-import { localBusinessJsonLd, storeMetadata } from '../lib/store-seo.ts'
+import { localBusinessJsonLd, sitePageMetadata, storeMetadata } from '../lib/store-seo.ts'
+
+test('homepage and news metadata provide canonical URLs and share cards', () => {
+  const home = sitePageMetadata({
+    title: 'MIMO$A | Creative crew BASED IN OKINAWA',
+    description: 'MIMO$A - A creative crew from Okinawa pushing boundaries in entertainment and fashion.',
+    path: '/',
+    locale: 'ja_JP',
+  })
+  const news = sitePageMetadata({
+    title: 'ニュース | MIMO$A',
+    description: 'MIMO$Aの最新ニュース、リリース、イベント情報。',
+    path: '/news',
+    locale: 'ja_JP',
+  })
+
+  assert.equal(home.alternates.canonical, '/')
+  assert.equal(home.openGraph.url, '/')
+  assert.equal(home.openGraph.title, home.title)
+  assert.equal(home.twitter.title, home.title)
+  assert.equal(home.twitter.card, 'summary')
+  assert.equal(home.openGraph.images[0].url, '/images/mimosa-logo.png')
+  assert.equal(news.alternates.canonical, '/news')
+  assert.equal(news.openGraph.url, '/news')
+  assert.equal(news.openGraph.title, news.title)
+  assert.equal(news.twitter.description, news.description)
+})
 
 test('open stores with a verified street address receive localized LocalBusiness data', () => {
   const replica = stores.find((store) => store.slug === 'bar-replica')

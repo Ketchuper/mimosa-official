@@ -76,3 +76,11 @@
 7. 後日、[PHOENIXDARTSのBar REPLICA店舗ページ](https://vs.phoenixdarts.com/jp/shop/shopDetailInfo/s_91342?s_seq=91342)の「店舗情報管理」から、使用停止済みの電話番号を削除するか、確認済みの現行番号へ差し替える。現行番号と操作権限は未確認。
 
 工程が完了するたび、この表の状態・完了条件と「今回の更新」を更新し、ユーザーに表示する。
+
+## 2026-10-27｜トップ・ニュースの共有メタ情報（ローカル実装）
+
+- 既存の店舗詳細4ページにはOGPとXカードが出ていたが、トップとニュース一覧には出ていなかったため、`sitePageMetadata`を追加し、タイトル・説明・共有画像・canonical URLをページ単位で設定した。共有画像は既存のMIMO$Aロゴ（2000×2000）を使用し、Xカードは正方形画像に合わせて`summary`とした。
+- 生成HTMLで `/`・`/news` と日英の店舗詳細4URLすべてにcanonical、OGP、Xカードが出ることを確認。店舗詳細の日英hreflangは維持。英語版のホーム・ニュースに対応する実ページがないため、存在しないURLへのhreflangは追加していない。
+- 確認: `node --test tests/*.test.mjs` 19/19成功、`npx next build --webpack`成功、`git diff --check`成功。
+- 変更ファイル: `lib/store-seo.ts`、`app/(ja)/page.tsx`、`app/(ja)/news/page.tsx`、`tests/store-seo.test.mjs`。
+- 現在はブランチ`codex/robots-txt-ai-bots`のローカル未コミット変更。本番サイト・PR・公開設定は変更していない。プレビューおよび本番URLでの確認後に工程8・9を完了扱いにする。

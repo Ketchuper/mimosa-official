@@ -11,8 +11,16 @@ import { BookUsCta } from "@/components/book-us-cta"
 import { ContactSection } from "@/components/contact-section"
 import { FloatingPlayer } from "@/components/floating-player"
 import { Footer } from "@/components/footer"
+import type { Metadata } from 'next'
 import { homepageJsonLd } from '@/lib/site-structured-data'
-import { SITE_URL } from '@/lib/store-seo'
+import { SITE_URL, sitePageMetadata } from '@/lib/store-seo'
+
+export const metadata: Metadata = sitePageMetadata({
+  title: 'MIMO$A | Creative crew BASED IN OKINAWA',
+  description: 'MIMO$A - A creative crew from Okinawa pushing boundaries in entertainment and fashion.',
+  path: '/',
+  locale: 'ja_JP',
+})
 
 export default function Home() {
   const jsonLd = homepageJsonLd(SITE_URL)

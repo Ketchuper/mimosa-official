@@ -1,6 +1,37 @@
+import type { Metadata } from 'next'
 import type { Locale, Store } from './stores'
 
 export const SITE_URL = 'https://www.m-i-m-o-s-a.com'
+
+type SitePageMetadataOptions = {
+  title: string
+  description: string
+  path: string
+  locale: 'ja_JP' | 'en_US'
+}
+
+export function sitePageMetadata({ title, description, path, locale }: SitePageMetadataOptions): Metadata {
+  const image = '/images/mimosa-logo.png'
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url: path,
+      locale,
+      images: [{ url: image, width: 2000, height: 2000, alt: 'MIMO$A' }],
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+      images: [image],
+    },
+  }
+}
 
 function pathFor(store: Store, locale: Locale) {
   return `${locale === 'en' ? '/en' : ''}/shops/${store.slug}`

@@ -1,14 +1,15 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { LatestNews } from '@/components/latest-news'
 import { newsData } from '@/lib/news'
 import { newsPageJsonLd } from '@/lib/site-structured-data'
-import { SITE_URL } from '@/lib/store-seo'
+import { SITE_URL, sitePageMetadata } from '@/lib/store-seo'
 
-export const metadata: Metadata = {
+export const metadata = sitePageMetadata({
   title: 'ニュース | MIMO$A',
   description: 'MIMO$Aの最新ニュース、リリース、イベント情報。',
-}
+  path: '/news',
+  locale: 'ja_JP',
+})
 
 export default function NewsPage() {
   const jsonLd = newsPageJsonLd(SITE_URL)
