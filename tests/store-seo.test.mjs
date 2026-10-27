@@ -1,0 +1,75 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { stores } from '../lib/stores.ts'
+import { localBusinessJsonLd, sitePageMetadata, storeMetadata } from '../lib/store-seo.ts'
+
+test('homepage and news metadata provide canonical URLs and share cards', () => {
+  const home = sitePageMetadata({
+    title: 'MIMO$A | Creative crew BASED IN OKINAWA',
+    description: 'MIMO$A - A creative crew from Okinawa pushing boundaries in entertainment and fashion.',
+    path: '/',
+    locale: 'ja_JP',
+  })
+  const news = sitePageMetadata({
+    title: 'ニュース | MIMO$A',
+    description: 'MIMO$Aの最新ニュース、リリース、イベント情報。',
+    path: '/news',
+    locale: 'ja_JP',
+  })
+
+  assert.equal(home.alternates.canonical, '/')
+  assert.equal(home.openGraph.url, '/')
+  assert.equal(home.openGraph.title, home.title)
+  assert.equal(home.twitter.title, home.title)
+  assert.equal(home.twitter.card, 'summary')
+  assert.equal(home.openGraph.images[0].url, '/images/mimosa-logo.png')
+  assert.equal(news.alternates.canonical, '/news')
+  assert.equal(news.openGraph.url, '/news')
+  assert.equal(news.openGraph.title, news.title)
+  assert.equal(news.twitter.description, news.description)
+})
+
+test('open stores with a verified street address receive localized LocalBusiness data', () => {
+  const replica = stores.find((store) => store.slug === 'bar-replica')
+  const data = localBusinessJsonLd(replica, 'en')
+  assert.equal(data['@type'], 'BarOrPub')
+  assert.equal(data.name, 'Bar REPLICA')
+  assert.equal(data.address['@type'], 'PostalAddress')
+  assert.equal(data.address.postalCode, '905-0013')
+  assert.equal(data.hasMap, replica.mapUrl)
+  assert.equal(data.parentOrganization['@id'], 'https://www.m-i-m-o-s-a.com/#organization')
+  assert.equal(data.openingHoursSpecification, undefined)
+})
+
+test('localized pages identify the same business and only link matching profiles', () => {
+  const store = stores.find(({ slug }) => slug === 'bar-chura-kin')
+  const ja = localBusinessJsonLd(store, 'ja')
+  const en = localBusinessJsonLd(store, 'en')
+  assert.equal(ja['@id'], en['@id'])
+  assert.deepEqual(ja.sameAs, [store.contactUrl])
+})
+
+test('preopening stores do not claim an open street business', () => {
+  const gate2 = stores.find((store) => store.slug === 'mimosa-gate2')
+  const koza = stores.find((store) => store.slug === 'mimosa-koza')
+  assert.equal(localBusinessJsonLd(gate2, 'ja'), undefined)
+  assert.equal(localBusinessJsonLd(koza, 'ja').address.postalCode, '904-0032')
+})
+
+test('El, france has no closure claim in its public copy or SEO metadata', () => {
+  const elFrance = stores.find((store) => store.slug === 'el-france')
+  const data = localBusinessJsonLd(elFrance, 'ja')
+  assert.equal(data['@type'], 'Restaurant')
+  assert.equal(data.name, 'El, france')
+  assert.equal(data.openingHoursSpecification, undefined)
+  const metadata = storeMetadata(elFrance, 'ja')
+  assert.doesNotMatch(`${metadata.title} ${metadata.description} ${elFrance.copy.en.description} ${elFrance.copy.ja.category} ${elFrance.copy.ja.description}`, /閉店|閉業|Closed|formerly|no longer open|過去に運営/i)
+})
+
+test('metadata identifies each language and gives unopened stores truthful titles', () => {
+  const gate2 = stores.find((store) => store.slug === 'mimosa-gate2')
+  const metadata = storeMetadata(gate2, 'en')
+  assert.match(metadata.title, /Preparing to open/)
+  assert.equal(metadata.alternates.canonical, '/en/shops/mimosa-gate2')
+  assert.equal(metadata.alternates.languages.ja, '/shops/mimosa-gate2')
+})

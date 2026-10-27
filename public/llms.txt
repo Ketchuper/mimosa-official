@@ -1,0 +1,20 @@
+# MIMO$A
+
+> MIMO$A is a creative crew based in Okinawa, Japan, operating businesses in food, apparel, and entertainment. The site introduces its shops, news, apparel and culture, and company information.
+>
+> MIMO$Aは沖縄を拠点に、飲食・アパレル・エンターテインメントの店舗を運営するクリエイティブクルーです。ショップ、ニュース、アパレル・カルチャー、会社情報を掲載しています。
+
+## Site information
+- Audience: People looking for MIMO$A shops, news, and company information in Okinawa.
+- Main topics: Public shop profiles, news and event information, apparel and culture, and company details.
+- Pricing: The site does not publish a common price list. For current menu or product prices, contact the relevant shop.
+- 料金: 公式サイトに共通の価格表はありません。メニューや商品の最新価格は各店舗へご確認ください。
+- Contact: contact@m-i-m-o-s-a.com
+
+## Main pages
+- [Home](https://www.m-i-m-o-s-a.com/): Overview of MIMO$A and its business.
+- [News](https://www.m-i-m-o-s-a.com/news): Latest news, releases, and event information.
+- [Bar REPLICA](https://www.m-i-m-o-s-a.com/shops/bar-replica): Music bar in Gusuku, Nago, Okinawa; darts and karaoke.
+- [Bar REPLICA (English)](https://www.m-i-m-o-s-a.com/en/shops/bar-replica): English shop information.
+- [El, france](https://www.m-i-m-o-s-a.com/shops/el-france): Teppanyaki steak restaurant in Daito, Nago, Okinawa.
+- [El, france (English)](https://www.m-i-m-o-s-a.com/en/shops/el-france): English shop information.

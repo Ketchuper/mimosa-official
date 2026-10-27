@@ -1,0 +1,92 @@
+import type { Metadata } from 'next'
+import type { Locale, Store } from './stores'
+
+export const SITE_URL = 'https://www.m-i-m-o-s-a.com'
+
+type SitePageMetadataOptions = {
+  title: string
+  description: string
+  path: string
+  locale: 'ja_JP' | 'en_US'
+}
+
+export function sitePageMetadata({ title, description, path, locale }: SitePageMetadataOptions): Metadata {
+  const image = '/images/mimosa-logo.png'
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url: path,
+      locale,
+      images: [{ url: image, width: 2000, height: 2000, alt: 'MIMO$A' }],
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+      images: [image],
+    },
+  }
+}
+
+function pathFor(store: Store, locale: Locale) {
+  return `${locale === 'en' ? '/en' : ''}/shops/${store.slug}`
+}
+
+export function storeMetadata(store: Store, locale: Locale) {
+  const statusLabel = store.status === 'preopening'
+    ? (locale === 'ja' ? '・開業準備中' : ' · Preparing to open')
+    : ''
+  const title = `${store.name} | ${store.area[locale]}${statusLabel} | MIMO$A`
+  const path = pathFor(store, locale)
+  return {
+    title,
+    description: store.copy[locale].description,
+    alternates: {
+      canonical: path,
+      languages: {
+        ja: pathFor(store, 'ja'),
+        en: pathFor(store, 'en'),
+        'x-default': pathFor(store, 'ja'),
+      },
+    },
+    openGraph: {
+      title,
+      description: store.copy[locale].description,
+      url: path,
+      locale: locale === 'ja' ? 'ja_JP' : 'en_US',
+      images: store.image ? [store.image] : undefined,
+    },
+  }
+}
+
+export function localBusinessJsonLd(store: Store, locale: Locale) {
+  if (store.status !== 'open' || !store.address) return undefined
+
+  const url = `${SITE_URL}${pathFor(store, locale)}`
+  return {
+    '@context': 'https://schema.org',
+    '@type': store.category,
+    '@id': `${SITE_URL}${pathFor(store, 'ja')}#business`,
+    parentOrganization: { '@id': `${SITE_URL}/#organization` },
+    name: store.name,
+    description: store.copy[locale].description,
+    url,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: store.address.streetAddress,
+      addressLocality: store.address.locality,
+      addressRegion: 'Okinawa',
+      postalCode: store.address.postalCode,
+      addressCountry: 'JP',
+    },
+    hasMap: store.mapUrl,
+    image: store.image ? `${SITE_URL}${store.image}` : undefined,
+    telephone: store.phone,
+    sameAs: store.contactUrl ? [store.contactUrl] : undefined,
+  }
+}
